@@ -159,9 +159,9 @@ server.servlet.session.timeout=30m
 - [x] (Tuỳ chọn) Thêm `spring-boot-devtools` (runtimeOnly) và `spring-boot-starter-validation`.
 
 **T0.2 — Profiles & Properties**
-- [ ] Tạo `application-dev.properties` và `application-test.properties` theo mẫu.
-- [ ] Cập nhật `application.properties` (base) tối giản.
-- [ ] Xác nhận chạy dev profile OK.
+- [x] Tạo `application-dev.properties` và `application-test.properties` theo mẫu.
+- [x] Cập nhật `application.properties` (base) tối giản.
+- [x] Xác nhận chạy dev profile OK.
 
 **T0.3 — Tạo cấu trúc package**
 - [ ] Tạo các package trống: `config/`, `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.

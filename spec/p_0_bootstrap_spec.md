@@ -155,8 +155,8 @@ server.servlet.session.timeout=30m
 
 ## 8) Phân rã Task nhỏ (cho AI Agent)
 **T0.1 — Thêm dependency**
-- [ ] Thêm `spring-boot-starter-thymeleaf` vào `pom.xml`.
-- [ ] (Tuỳ chọn) Thêm `spring-boot-devtools` (runtimeOnly) và `spring-boot-starter-validation`.
+- [x] Thêm `spring-boot-starter-thymeleaf` vào `pom.xml`.
+- [x] (Tuỳ chọn) Thêm `spring-boot-devtools` (runtimeOnly) và `spring-boot-starter-validation`.
 
 **T0.2 — Profiles & Properties**
 - [ ] Tạo `application-dev.properties` và `application-test.properties` theo mẫu.

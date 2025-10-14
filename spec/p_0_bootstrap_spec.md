@@ -171,10 +171,10 @@ server.servlet.session.timeout=30m
 - [x] (Tuỳ chọn) `GET /health` trả "OK".
 
 **T0.5 — Thymeleaf Layout & Pages**
-- [ ] Tạo `templates/_layout.html` (navbar + `th:insert` vùng content).
-- [ ] Tạo `templates/fragments/_flash.html`.
-- [ ] Tạo `templates/home/index.html` (nội dung chào + 2 nút Login/Tasks).
-- [ ] Tạo `static/css/app.css`, `static/js/app.js` (file rỗng ban đầu).
+- [x] Tạo `templates/_layout.html` (navbar + `th:insert` vùng content).
+- [x] Tạo `templates/fragments/_flash.html`.
+- [x] Tạo `templates/home/index.html` (nội dung chào + 2 nút Login/Tasks).
+- [x] Tạo `static/css/app.css`, `static/js/app.js` (file rỗng ban đầu).
 
 **T0.6 — H2 Console & Verify**
 - [ ] Bật H2 console ở dev, kiểm tra truy cập `/h2-console`.

@@ -155,43 +155,43 @@ server.servlet.session.timeout=30m
 
 ## 8) Phân rã Task nhỏ (cho AI Agent)
 **T0.1 — Thêm dependency**
-- [ ] Thêm `spring-boot-starter-thymeleaf` vào `pom.xml`.
-- [ ] (Tuỳ chọn) Thêm `spring-boot-devtools` (runtimeOnly) và `spring-boot-starter-validation`.
+- [x] Thêm `spring-boot-starter-thymeleaf` vào `pom.xml`.
+- [x] (Tuỳ chọn) Thêm `spring-boot-devtools` (runtimeOnly) và `spring-boot-starter-validation`.
 
 **T0.2 — Profiles & Properties**
-- [ ] Tạo `application-dev.properties` và `application-test.properties` theo mẫu.
-- [ ] Cập nhật `application.properties` (base) tối giản.
-- [ ] Xác nhận chạy dev profile OK.
+- [x] Tạo `application-dev.properties` và `application-test.properties` theo mẫu.
+- [x] Cập nhật `application.properties` (base) tối giản.
+- [x] Xác nhận chạy dev profile OK.
 
 **T0.3 — Tạo cấu trúc package**
-- [ ] Tạo các package trống: `config/`, `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.
+- [x] Tạo các package trống: `config/`, `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.
 
 **T0.4 — HomeController + Routes**
-- [ ] Tạo `HomeController` với `GET /` trả view `home/index`.
-- [ ] (Tuỳ chọn) `GET /health` trả "OK".
+- [x] Tạo `HomeController` với `GET /` trả view `home/index`.
+- [x] (Tuỳ chọn) `GET /health` trả "OK".
 
 **T0.5 — Thymeleaf Layout & Pages**
-- [ ] Tạo `templates/_layout.html` (navbar + `th:insert` vùng content).
-- [ ] Tạo `templates/fragments/_flash.html`.
-- [ ] Tạo `templates/home/index.html` (nội dung chào + 2 nút Login/Tasks).
-- [ ] Tạo `static/css/app.css`, `static/js/app.js` (file rỗng ban đầu).
+- [x] Tạo `templates/_layout.html` (navbar + `th:insert` vùng content).
+- [x] Tạo `templates/fragments/_flash.html`.
+- [x] Tạo `templates/home/index.html` (nội dung chào + 2 nút Login/Tasks).
+- [x] Tạo `static/css/app.css`, `static/js/app.js` (file rỗng ban đầu).
 
 **T0.6 — H2 Console & Verify**
-- [ ] Bật H2 console ở dev, kiểm tra truy cập `/h2-console`.
-- [ ] Kết nối tới DB đúng URL cấu hình.
+- [x] Bật H2 console ở dev, kiểm tra truy cập `/h2-console`.
+- [x] Kết nối tới DB đúng URL cấu hình.
 
 **T0.7 — Smoke Tests & README**
-- [ ] Đảm bảo `contextLoads()` pass.
-- [ ] README: hướng dẫn chạy P0 (profile dev, truy cập `/` và `/h2-console`).
+- [x] Đảm bảo `contextLoads()` pass.
+- [x] README: hướng dẫn chạy P0 (profile dev, truy cập `/` và `/h2-console`).
 
 ---
 
 ## 9) Acceptance Criteria chi tiết (Checklist)
-- [ ] App khởi động profile `dev` không lỗi.
-- [ ] Trang `/` render qua `_layout.html` và có flash fragment.
-- [ ] Có thể truy cập `/h2-console` và login DB thành công.
-- [ ] Cấu trúc package đúng như skeleton; sẵn sàng thêm code ở P1.
-- [ ] README mô tả cách chạy và mục tiêu P0.
+- [x] App khởi động profile `dev` không lỗi.
+- [x] Trang `/` render qua `_layout.html` và có flash fragment.
+- [x] Có thể truy cập `/h2-console` và login DB thành công.
+- [x] Cấu trúc package đúng như skeleton; sẵn sàng thêm code ở P1.
+- [x] README mô tả cách chạy và mục tiêu P0.
 
 ---
 

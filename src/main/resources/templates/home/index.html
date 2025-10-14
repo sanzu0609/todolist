@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="_layout :: layout(~{::content}, 'Home')">
+<body>
+<section class="hero" th:fragment="content">
+    <h1>Welcome to Todolist</h1>
+    <p>Manage your tasks and subtasks effortlessly with ownership and security built-in.</p>
+    <div class="actions">
+        <a class="btn" th:href="@{/login}">Login</a>
+        <a class="btn btn-primary" th:href="@{/tasks}">Go to Tasks</a>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="flash">
+    <div class="flash-messages" role="alert" aria-live="polite">
+        <div class="flash flash-success" th:if="${success}" th:text="${success}"></div>
+        <div class="flash flash-error" th:if="${error}" th:text="${error}"></div>
+    </div>
+</th:block>

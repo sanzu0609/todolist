@@ -164,7 +164,7 @@ server.servlet.session.timeout=30m
 - [x] Xác nhận chạy dev profile OK.
 
 **T0.3 — Tạo cấu trúc package**
-- [ ] Tạo các package trống: `config/`, `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.
+- [x] Tạo các package trống: `config/`, `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.
 
 **T0.4 — HomeController + Routes**
 - [ ] Tạo `HomeController` với `GET /` trả view `home/index`.

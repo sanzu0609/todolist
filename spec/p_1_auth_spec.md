@@ -238,10 +238,10 @@ server.servlet.session.timeout=30m
 - [x] `UserRepository extends JpaRepository<User, Long>` + `Optional<User> findByUsername(String u)`.
 
 **T3 — Security Layer**
-- [ ] `PasswordEncoder` bean = BCrypt(10).
-- [ ] `AppUserDetails` map từ `User` → `UserDetails`.
-- [ ] `AppUserDetailsService implements UserDetailsService` (loadByUsername).
-- [ ] `SecurityConfig` (permitAll `/login`, `/register`, static; authenticated else; formLogin; logout; session timeout).
+- [x] `PasswordEncoder` bean = BCrypt(10).
+- [x] `AppUserDetails` map từ `User` → `UserDetails`.
+- [x] `AppUserDetailsService implements UserDetailsService` (loadByUsername).
+- [x] `SecurityConfig` (permitAll `/login`, `/register`, static; authenticated else; formLogin; logout; session timeout).
 
 **T4 — DTO & Validation**
 - [ ] `RegisterForm`, `ProfileForm`, `PasswordChangeForm` (+ annotations @NotBlank, @Size, pattern, v.v.).

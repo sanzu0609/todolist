@@ -252,7 +252,7 @@ server.servlet.session.timeout=30m
 - [x] `changePassword(userId, form)` (verify old → encode new)
 
 **T6 — AuthController**
-- [ ] `GET /login`, `GET /register`, `POST /register` (flash success/errors; redirect `/login?registered`).
+- [x] `GET /login`, `GET /register`, `POST /register` (flash success/errors; redirect `/login?registered`).
 
 **T7 — ProfileController**
 - [ ] `GET /profile` (đổ data user hiện tại)

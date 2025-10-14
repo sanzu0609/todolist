@@ -13,10 +13,16 @@ mvn spring-boot:run "-Dspring-boot.run.profiles=dev"
 The app serves on `http://localhost:8080`.
 
 - Home page: `http://localhost:8080/`
+- Login: `http://localhost:8080/login`
 - H2 console: `http://localhost:8080/h2-console`
   - JDBC URL: `jdbc:h2:file:./data/devdb`
   - Username: `sa`
   - Password: *(blank)*
+
+### Demo account (dev profile)
+- Username: `demo`
+- Password: `demo1234`
+  - Seeded automatically via `CommandLineRunner` when profile `dev` is active.
 
 Stop with `Ctrl+C`.
 

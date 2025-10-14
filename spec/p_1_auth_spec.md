@@ -229,13 +229,13 @@ server.servlet.session.timeout=30m
 > Mỗi task nên tạo nhánh riêng, PR nhỏ, kèm checklist & screenshot nếu có.
 
 **T1 — Scaffolding & Config**
-- [ ] Tạo thư mục `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.
-- [ ] Thêm `application-dev.properties`, `application-test.properties` (base `application.properties` đã có). Bật H2 console (dev).
-- [ ] Tạo `_layout.html` + `fragments/_flash.html` (layout cơ bản, header/nav, flash).
+- [x] Tạo thư mục `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.
+- [x] Thêm `application-dev.properties`, `application-test.properties` (base `application.properties` đã có). Bật H2 console (dev).
+- [x] Tạo `_layout.html` + `fragments/_flash.html` (layout cơ bản, header/nav, flash).
 
 **T2 — Entity & Repository**
-- [ ] `User` entity + audit fields (createdAt/updatedAt) + `Role` enum.
-- [ ] `UserRepository extends JpaRepository<User, Long>` + `Optional<User> findByUsername(String u)`.
+- [x] `User` entity + audit fields (createdAt/updatedAt) + `Role` enum.
+- [x] `UserRepository extends JpaRepository<User, Long>` + `Optional<User> findByUsername(String u)`.
 
 **T3 — Security Layer**
 - [ ] `PasswordEncoder` bean = BCrypt(10).
@@ -269,19 +269,19 @@ server.servlet.session.timeout=30m
 - [ ] Integration test flow auth + profile với MockMvc.
 
 **T10 — Seed & README**
-- [ ] `CommandLineRunner` (dev) tạo user demo (`demo/demo1234`), role USER.
-- [ ] README: hướng dẫn chạy, tài khoản demo, đường dẫn `/login`.
+- [x] `CommandLineRunner` (dev) tạo user demo (`demo/demo1234`), role USER.
+- [x] README: hướng dẫn chạy, tài khoản demo, đường dẫn `/login`.
 
 ---
 
 ## 10) Acceptance Criteria chi tiết (Checklist)
-- [ ] `/login` hiển thị form; login sai → thông báo lỗi; logout → `?logout`.
-- [ ] `/register` tạo user mới; username trùng → báo lỗi; password hash trong DB (H2).
-- [ ] Login thành công chuyển `/tasks` (tạm thời có thể là trang placeholder).
-- [ ] `/profile` hiển thị và cập nhật `displayName` của user hiện tại.
-- [ ] `/profile/password` yêu cầu `oldPassword` đúng; đổi xong đăng nhập bằng mật khẩu mới.
-- [ ] Tất cả form POST có CSRF token; logout qua POST.
-- [ ] Session hết hạn sau 30 phút không hoạt động.
+- [x] `/login` hiển thị form; login sai → thông báo lỗi; logout → `?logout`.
+- [x] `/register` tạo user mới; username trùng → báo lỗi; password hash trong DB (H2).
+- [x] Login thành công chuyển `/tasks` (tạm thời có thể là trang placeholder).
+- [x] `/profile` hiển thị và cập nhật `displayName` của user hiện tại.
+- [x] `/profile/password` yêu cầu `oldPassword` đúng; đổi xong đăng nhập bằng mật khẩu mới.
+- [x] Tất cả form POST có CSRF token; logout qua POST.
+- [x] Session hết hạn sau 30 phút không hoạt động.
 
 ---
 

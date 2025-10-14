@@ -255,9 +255,9 @@ server.servlet.session.timeout=30m
 - [x] `GET /login`, `GET /register`, `POST /register` (flash success/errors; redirect `/login?registered`).
 
 **T7 — ProfileController**
-- [ ] `GET /profile` (đổ data user hiện tại)
-- [ ] `POST /profile` (update displayName)
-- [ ] `POST /profile/password` (change password)
+- [x] `GET /profile` (đổ data user hiện tại)
+- [x] `POST /profile` (update displayName)
+- [x] `POST /profile/password` (change password)
 
 **T8 — Views (Thymeleaf)**
 - [ ] `auth/login.html`, `auth/register.html`

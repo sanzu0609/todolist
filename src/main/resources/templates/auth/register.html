@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="_layout :: layout(~{::section}, 'Register')">
+<section class="form-card" th:fragment="section">
+    <h1>Create account</h1>
+    <form th:action="@{/register}" th:object="${registerForm}" method="post">
+        <div class="form-field" th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
+            <label for="username">Username</label>
+            <input id="username" type="text" th:field="*{username}" autocomplete="username" required>
+            <p class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+        </div>
+        <div class="form-field">
+            <label for="displayName">Display name (optional)</label>
+            <input id="displayName" type="text" th:field="*{displayName}" autocomplete="name">
+            <p class="hint">Shown on profile and task views.</p>
+        </div>
+        <div class="form-field" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+            <label for="password">Password</label>
+            <input id="password" type="password" th:field="*{password}" autocomplete="new-password" required>
+            <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+        <div class="form-field" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'has-error'">
+            <label for="confirmPassword">Confirm password</label>
+            <input id="confirmPassword" type="password" th:field="*{confirmPassword}" autocomplete="new-password" required>
+            <p class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p class="form-note">Already have an account? <a th:href="@{/login}">Login here</a>.</p>
+</section>
+</html>

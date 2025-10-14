@@ -244,7 +244,7 @@ server.servlet.session.timeout=30m
 - [x] `SecurityConfig` (permitAll `/login`, `/register`, static; authenticated else; formLogin; logout; session timeout).
 
 **T4 — DTO & Validation**
-- [ ] `RegisterForm`, `ProfileForm`, `PasswordChangeForm` (+ annotations @NotBlank, @Size, pattern, v.v.).
+- [x] `RegisterForm`, `ProfileForm`, `PasswordChangeForm` (+ annotations @NotBlank, @Size, pattern, v.v.).
 
 **T5 — UserService**
 - [ ] `register(form)` (unique username, encode, save)

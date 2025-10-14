@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout (content, pageTitle='Todolist')">
 <head>
     <meta charset="UTF-8">
@@ -11,12 +11,14 @@
     <nav class="navbar">
         <a th:href="@{/}" class="brand">todolist</a>
         <ul class="nav-links">
-            <li><a th:href="@{/login}">Login</a></li>
+            <li th:if="${#authorization.expression('isAnonymous()')}"><a th:href="@{/login}">Login</a></li>
             <li><a th:href="@{/tasks}">Tasks</a></li>
-            <li><a th:href="@{/profile}" class="disabled" aria-disabled="true">Profile</a></li>
-            <li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/profile}" th:text="${#authentication.principal.username}">Profile</a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
                 <form th:action="@{/logout}" method="post">
-                    <button type="submit" disabled>Logout</button>
+                    <button type="submit">Logout</button>
                 </form>
             </li>
         </ul>

@@ -260,9 +260,9 @@ server.servlet.session.timeout=30m
 - [x] `POST /profile/password` (change password)
 
 **T8 — Views (Thymeleaf)**
-- [ ] `auth/login.html`, `auth/register.html`
-- [ ] `user/profile.html` (2 forms)
-- [ ] Header hiển thị username; Logout là form POST kèm CSRF.
+- [x] `auth/login.html`, `auth/register.html`
+- [x] `user/profile.html` (2 forms)
+- [x] Header hiển thị username; Logout là form POST kèm CSRF.
 
 **T9 — Testing**
 - [ ] Unit test `UserService` (register, changePassword, updateDisplayName).

@@ -167,8 +167,8 @@ server.servlet.session.timeout=30m
 - [x] Tạo các package trống: `config/`, `security/`, `domain/{entity,dto,enums}`, `repository/`, `service/`, `web/`, `exception/`.
 
 **T0.4 — HomeController + Routes**
-- [ ] Tạo `HomeController` với `GET /` trả view `home/index`.
-- [ ] (Tuỳ chọn) `GET /health` trả "OK".
+- [x] Tạo `HomeController` với `GET /` trả view `home/index`.
+- [x] (Tuỳ chọn) `GET /health` trả "OK".
 
 **T0.5 — Thymeleaf Layout & Pages**
 - [ ] Tạo `templates/_layout.html` (navbar + `th:insert` vùng content).

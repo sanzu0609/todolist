@@ -265,8 +265,8 @@ server.servlet.session.timeout=30m
 - [x] Header hiển thị username; Logout là form POST kèm CSRF.
 
 **T9 — Testing**
-- [ ] Unit test `UserService` (register, changePassword, updateDisplayName).
-- [ ] Integration test flow auth + profile với MockMvc.
+- [x] Unit test `UserService` (register, changePassword, updateDisplayName).
+- [x] Integration test flow auth + profile với MockMvc.
 
 **T10 — Seed & README**
 - [x] `CommandLineRunner` (dev) tạo user demo (`demo/demo1234`), role USER.

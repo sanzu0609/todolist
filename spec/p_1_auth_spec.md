@@ -247,9 +247,9 @@ server.servlet.session.timeout=30m
 - [x] `RegisterForm`, `ProfileForm`, `PasswordChangeForm` (+ annotations @NotBlank, @Size, pattern, v.v.).
 
 **T5 — UserService**
-- [ ] `register(form)` (unique username, encode, save)
-- [ ] `updateDisplayName(userId, form)`
-- [ ] `changePassword(userId, form)` (verify old → encode new)
+- [x] `register(form)` (unique username, encode, save)
+- [x] `updateDisplayName(userId, form)`
+- [x] `changePassword(userId, form)` (verify old → encode new)
 
 **T6 — AuthController**
 - [ ] `GET /login`, `GET /register`, `POST /register` (flash success/errors; redirect `/login?registered`).

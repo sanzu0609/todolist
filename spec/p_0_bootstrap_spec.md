@@ -181,17 +181,17 @@ server.servlet.session.timeout=30m
 - [x] Kết nối tới DB đúng URL cấu hình.
 
 **T0.7 — Smoke Tests & README**
-- [ ] Đảm bảo `contextLoads()` pass.
-- [ ] README: hướng dẫn chạy P0 (profile dev, truy cập `/` và `/h2-console`).
+- [x] Đảm bảo `contextLoads()` pass.
+- [x] README: hướng dẫn chạy P0 (profile dev, truy cập `/` và `/h2-console`).
 
 ---
 
 ## 9) Acceptance Criteria chi tiết (Checklist)
-- [ ] App khởi động profile `dev` không lỗi.
-- [ ] Trang `/` render qua `_layout.html` và có flash fragment.
-- [ ] Có thể truy cập `/h2-console` và login DB thành công.
-- [ ] Cấu trúc package đúng như skeleton; sẵn sàng thêm code ở P1.
-- [ ] README mô tả cách chạy và mục tiêu P0.
+- [x] App khởi động profile `dev` không lỗi.
+- [x] Trang `/` render qua `_layout.html` và có flash fragment.
+- [x] Có thể truy cập `/h2-console` và login DB thành công.
+- [x] Cấu trúc package đúng như skeleton; sẵn sàng thêm code ở P1.
+- [x] README mô tả cách chạy và mục tiêu P0.
 
 ---
 

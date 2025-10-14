@@ -177,8 +177,8 @@ server.servlet.session.timeout=30m
 - [x] Tạo `static/css/app.css`, `static/js/app.js` (file rỗng ban đầu).
 
 **T0.6 — H2 Console & Verify**
-- [ ] Bật H2 console ở dev, kiểm tra truy cập `/h2-console`.
-- [ ] Kết nối tới DB đúng URL cấu hình.
+- [x] Bật H2 console ở dev, kiểm tra truy cập `/h2-console`.
+- [x] Kết nối tới DB đúng URL cấu hình.
 
 **T0.7 — Smoke Tests & README**
 - [ ] Đảm bảo `contextLoads()` pass.

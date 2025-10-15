@@ -212,7 +212,7 @@ public record SubtaskUpdateDto(String title, SubtaskStatus status) {}
 
 ## 9) Phân rã Task nhỏ (cho AI Agent)
 **T2.1 — Enums**
-- [ ] Tạo `Priority`, `TaskStatus`, `SubtaskStatus` trong `domain/enums`.
+- [x] Tạo `Priority`, `TaskStatus`, `SubtaskStatus` trong `domain/enums`.
 
 **T2.2 — Entities**
 - [ ] Tạo `Task` với các trường & mapping, `@Version`, indexes.

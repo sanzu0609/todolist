@@ -215,9 +215,9 @@ public record SubtaskUpdateDto(String title, SubtaskStatus status) {}
 - [x] Tạo `Priority`, `TaskStatus`, `SubtaskStatus` trong `domain/enums`.
 
 **T2.2 — Entities**
-- [ ] Tạo `Task` với các trường & mapping, `@Version`, indexes.
-- [ ] Tạo `Subtask` với mapping về `Task`, indexes.
-- [ ] Thêm `@PrePersist/@PreUpdate` set `createdAt/updatedAt` (cho cả 2 entity).
+- [x] Tạo `Task` với các trường & mapping, `@Version`, indexes.
+- [x] Tạo `Subtask` với mapping về `Task`, indexes.
+- [x] Thêm `@PrePersist/@PreUpdate` set `createdAt/updatedAt` (cho cả 2 entity).
 
 **T2.3 — Repositories**
 - [ ] `TaskRepository` với finder theo `ownerId` + filter + search.

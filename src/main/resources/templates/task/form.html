@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="_layout :: layout(~{::section}, ${formTitle})">
+<section th:fragment="section" class="page-container">
+    <div class="page-header">
+        <h1 th:text="${formTitle}">Task</h1>
+        <a class="btn btn-secondary" th:href="@{/tasks}">Back to list</a>
+    </div>
+
+    <form th:action="@{${formAction}}" th:object="${form}" method="post" class="form-card">
+        <div class="form-field" th:classappend="${#fields.hasErrors('title')} ? 'has-error'">
+            <label for="title">Title</label>
+            <input id="title" type="text" th:field="*{title}" placeholder="Task title" required>
+            <p class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+        </div>
+
+        <div class="form-field">
+            <label for="description">Description</label>
+            <textarea id="description" rows="4" th:field="*{description}" placeholder="Optional details"></textarea>
+            <p class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+        </div>
+
+        <div class="form-field" th:classappend="${#fields.hasErrors('priority')} ? 'has-error'">
+            <label for="priority">Priority</label>
+            <select id="priority" th:field="*{priority}" required>
+                <option th:each="priorityOpt : ${priorities}"
+                        th:value="${priorityOpt}"
+                        th:text="${priorityOpt}"></option>
+            </select>
+            <p class="error" th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></p>
+        </div>
+
+        <div class="form-field">
+            <label for="dueDate">Due date</label>
+            <input id="dueDate" type="date" th:field="*{dueDate}">
+            <p class="error" th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}"></p>
+        </div>
+
+        <div class="form-field" th:if="${isEdit}" th:classappend="${#fields.hasErrors('status')} ? 'has-error'">
+            <label for="status">Status</label>
+            <select id="status" th:field="*{status}">
+                <option th:each="statusOpt : ${statuses}"
+                        th:value="${statusOpt}"
+                        th:text="${statusOpt}"></option>
+            </select>
+            <p class="error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></p>
+        </div>
+
+        <input type="hidden" th:if="${isEdit}" th:field="*{version}">
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" th:text="${isEdit} ? 'Update' : 'Create'"></button>
+            <a class="btn btn-secondary" th:href="@{/tasks}">Cancel</a>
+        </div>
+    </form>
+</section>
+</html>

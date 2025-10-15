@@ -194,10 +194,10 @@ subtask/
 
 ## 13) Phân rã Task nhỏ (cho AI Agent)
 **T3.1 — TaskController + Views (List/Create/Edit/Delete/Status)**
-- [ ] Controller: routes `/tasks`… theo spec.
-- [ ] `task/list.html`: filter/search/sort + bảng.
-- [ ] `task/form.html`: tạo & sửa (dùng chung); bind errors; hidden `version`.
-- [ ] Flash message cho create/update/delete.
+- [x] Controller: routes `/tasks`… theo spec.
+- [x] `task/list.html`: filter/search/sort + bảng.
+- [x] `task/form.html`: tạo & sửa (dùng chung); bind errors; hidden `version`.
+- [x] Flash message cho create/update/delete.
 
 **T3.2 — Task Detail + Subtasks Panel**
 - [ ] `task/detail.html` hiển thị task + include `subtask/_list.html` & `_form.html`.

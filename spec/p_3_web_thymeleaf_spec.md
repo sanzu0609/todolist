@@ -194,27 +194,27 @@ subtask/
 
 ## 13) Phân rã Task nhỏ (cho AI Agent)
 **T3.1 — TaskController + Views (List/Create/Edit/Delete/Status)**
-- [ ] Controller: routes `/tasks`… theo spec.
-- [ ] `task/list.html`: filter/search/sort + bảng.
-- [ ] `task/form.html`: tạo & sửa (dùng chung); bind errors; hidden `version`.
-- [ ] Flash message cho create/update/delete.
+- [x] Controller: routes `/tasks`… theo spec.
+- [x] `task/list.html`: filter/search/sort + bảng.
+- [x] `task/form.html`: tạo & sửa (dùng chung); bind errors; hidden `version`.
+- [x] Flash message cho create/update/delete.
 
 **T3.2 — Task Detail + Subtasks Panel**
-- [ ] `task/detail.html` hiển thị task + include `subtask/_list.html` & `_form.html`.
-- [ ] Nút đổi status nhanh ở task.
+- [x] `task/detail.html` hiển thị task + include `subtask/_list.html` & `_form.html`.
+- [x] Nút đổi status nhanh ở task.
 
 **T3.3 — SubtaskController + Fragments**
-- [ ] Controller: create/update/toggle/delete theo routes.
-- [ ] `subtask/_list.html`: danh sách + actions.
-- [ ] `subtask/_form.html`: form thêm/sửa inline.
+- [x] Controller: create/update/toggle/delete theo routes.
+- [x] `subtask/_list.html`: danh sách + actions.
+- [x] `subtask/_form.html`: form thêm/sửa inline.
 
 **T3.4 — Ownership & Security in UI**
-- [ ] Không render action nếu không thuộc owner (giữ code gọn gàng; service vẫn kiểm tra).
-- [ ] Tất cả form POST có CSRF.
+- [x] Không render action nếu không thuộc owner (giữ code gọn gàng; service vẫn kiểm tra).
+- [x] Tất cả form POST có CSRF.
 
 **T3.5 — Optional: Pagination & Sorting Helpers**
-- [ ] Fragment `_pagination.html`.
-- [ ] Helper build URL giữ nguyên params khi đổi trang/sort.
+- [x] Fragment `_pagination.html`.
+- [x] Helper build URL giữ nguyên params khi đổi trang/sort.
 
 **T3.6 — Validation UX**
 - [ ] Hiển thị `th:errors` tại từng input.

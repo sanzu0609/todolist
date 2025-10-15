@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import org.example.todolist.domain.enums.Priority;
 import org.example.todolist.domain.enums.TaskStatus;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public record TaskUpdateDto(
     @NotBlank
@@ -18,6 +19,7 @@ public record TaskUpdateDto(
     @NotNull
     Priority priority,
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     LocalDate dueDate,
 
     @NotNull

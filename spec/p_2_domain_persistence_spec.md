@@ -227,9 +227,9 @@ public record SubtaskUpdateDto(String title, SubtaskStatus status) {}
 - [x] Tạo DTO: `TaskCreateDto`, `TaskUpdateDto`, `TaskFilter`, `SubtaskCreateDto`, `SubtaskUpdateDto` + validation annotations.
 
 **T2.5 — Services (interfaces + impl skeleton)**
-- [ ] `TaskService` + `TaskServiceImpl` (create/update/changeStatus/delete/getOrThrow/list).
-- [ ] `SubtaskService` + `SubtaskServiceImpl` (listByTask/create/update/toggle/delete).
-- [ ] Tất cả method kiểm tra **ownership** bằng repo finder có `ownerId`.
+- [x] `TaskService` + `TaskServiceImpl` (create/update/changeStatus/delete/getOrThrow/list).
+- [x] `SubtaskService` + `SubtaskServiceImpl` (listByTask/create/update/toggle/delete).
+- [x] Tất cả method kiểm tra **ownership** bằng repo finder có `ownerId`.
 
 **T2.6 — Smoke test bằng CommandLineRunner (tạm thời dev)**
 - [ ] (Tuỳ chọn) Tạo vài `Task`/`Subtask` mẫu cho user demo (đã seed ở P1) để kiểm tra mapping & cascade.

@@ -204,9 +204,9 @@ subtask/
 - [x] Nút đổi status nhanh ở task.
 
 **T3.3 — SubtaskController + Fragments**
-- [ ] Controller: create/update/toggle/delete theo routes.
-- [ ] `subtask/_list.html`: danh sách + actions.
-- [ ] `subtask/_form.html`: form thêm/sửa inline.
+- [x] Controller: create/update/toggle/delete theo routes.
+- [x] `subtask/_list.html`: danh sách + actions.
+- [x] `subtask/_form.html`: form thêm/sửa inline.
 
 **T3.4 — Ownership & Security in UI**
 - [ ] Không render action nếu không thuộc owner (giữ code gọn gàng; service vẫn kiểm tra).

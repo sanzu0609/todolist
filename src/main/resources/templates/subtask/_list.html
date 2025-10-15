@@ -1,8 +1,41 @@
-﻿<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="list(subtasks)">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="list(taskId, subtasks, statuses)">
     <div th:if="${#lists.isEmpty(subtasks)}" class="empty-state">
         <p>No subtasks yet.</p>
     </div>
-    <ul th:if="${!#lists.isEmpty(subtasks)}" class="subtask-list">
-        <li th:each="subtask : ${subtasks}" th:text="${subtask.title}"></li>
-    </ul>
+    <table class="table" th:if="${!#lists.isEmpty(subtasks)}">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subtask : ${subtasks}">
+            <td>
+                <form class="inline-form" th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}|}" method="post">
+                    <input type="text" name="title" th:value="${subtask.title}" required>
+                    <select name="status">
+                        <option th:each="statusOpt : ${statuses}"
+                                th:value="${statusOpt}"
+                                th:selected="${subtask.status} == ${statusOpt}"
+                                th:text="${statusOpt}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-link">Save</button>
+                </form>
+            </td>
+            <td><span class="badge" th:text="${subtask.status}"></span></td>
+            <td class="actions">
+                <form th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}/status|}" method="post" class="inline-form">
+                    <input type="hidden" name="status" th:value="${subtask.status == T(org.example.todolist.domain.enums.SubtaskStatus).DONE ? T(org.example.todolist.domain.enums.SubtaskStatus).TODO : T(org.example.todolist.domain.enums.SubtaskStatus).DONE}">
+                    <button type="submit" class="btn btn-link" th:text="${subtask.status == T(org.example.todolist.domain.enums.SubtaskStatus).DONE ? 'Reopen' : 'Mark done'}"></button>
+                </form>
+                <form th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}/delete|}" method="post" class="inline-form"
+                      onsubmit="return confirm('Delete this subtask?');">
+                    <button type="submit" class="btn btn-link destructive">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </th:block>

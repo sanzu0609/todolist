@@ -10,6 +10,7 @@ import org.example.todolist.domain.dto.TaskUpdateDto;
 import org.example.todolist.domain.entity.Task;
 import org.example.todolist.domain.enums.Priority;
 import org.example.todolist.domain.enums.TaskStatus;
+import org.example.todolist.domain.enums.SubtaskStatus;
 import org.example.todolist.security.AppUserDetails;
 import org.example.todolist.service.SubtaskService;
 import org.example.todolist.service.TaskService;
@@ -57,6 +58,7 @@ public class TaskController {
         model.addAttribute("filter", filter);
         model.addAttribute("priorities", Priority.values());
         model.addAttribute("statuses", TaskStatus.values());
+        model.addAttribute("subtaskStatuses", SubtaskStatus.values());
 
         return "task/list";
     }
@@ -101,6 +103,7 @@ public class TaskController {
         Task task = taskService.getTask(principal.getId(), id);
         model.addAttribute("task", task);
         model.addAttribute("statuses", TaskStatus.values());
+        model.addAttribute("subtaskStatuses", SubtaskStatus.values());
         model.addAttribute("priorities", Priority.values());
         model.addAttribute("subtasks", subtaskService.listByTask(principal.getId(), id));
         if (!model.containsAttribute("newSubtask")) {
@@ -184,6 +187,7 @@ public class TaskController {
     private void populateFormModel(Model model, boolean isEdit) {
         model.addAttribute("priorities", Priority.values());
         model.addAttribute("statuses", TaskStatus.values());
+        model.addAttribute("subtaskStatuses", SubtaskStatus.values());
         model.addAttribute("isEdit", isEdit);
     }
 

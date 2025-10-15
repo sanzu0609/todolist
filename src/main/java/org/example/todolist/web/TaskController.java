@@ -3,6 +3,7 @@ package org.example.todolist.web;
 import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.util.Optional;
+import org.example.todolist.domain.dto.SubtaskCreateDto;
 import org.example.todolist.domain.dto.TaskCreateDto;
 import org.example.todolist.domain.dto.TaskFilter;
 import org.example.todolist.domain.dto.TaskUpdateDto;
@@ -10,6 +11,7 @@ import org.example.todolist.domain.entity.Task;
 import org.example.todolist.domain.enums.Priority;
 import org.example.todolist.domain.enums.TaskStatus;
 import org.example.todolist.security.AppUserDetails;
+import org.example.todolist.service.SubtaskService;
 import org.example.todolist.service.TaskService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,9 +32,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TaskController {
 
     private final TaskService taskService;
+    private final SubtaskService subtaskService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, SubtaskService subtaskService) {
         this.taskService = taskService;
+        this.subtaskService = subtaskService;
     }
 
     @GetMapping("/tasks")
@@ -88,6 +92,23 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @GetMapping("/tasks/{id}")
+    public String detail(
+        @AuthenticationPrincipal AppUserDetails principal,
+        @PathVariable("id") Long id,
+        Model model
+    ) {
+        Task task = taskService.getTask(principal.getId(), id);
+        model.addAttribute("task", task);
+        model.addAttribute("statuses", TaskStatus.values());
+        model.addAttribute("priorities", Priority.values());
+        model.addAttribute("subtasks", subtaskService.listByTask(principal.getId(), id));
+        if (!model.containsAttribute("newSubtask")) {
+            model.addAttribute("newSubtask", new SubtaskCreateDto(""));
+        }
+        return "task/detail";
+    }
+
     @GetMapping("/tasks/{id}/edit")
     public String editTaskForm(
         @AuthenticationPrincipal AppUserDetails principal,
@@ -141,11 +162,12 @@ public class TaskController {
         @PathVariable("id") Long id,
         @RequestParam("status") TaskStatus status,
         @RequestParam(name = "version", required = false) Long version,
+        @RequestParam(name = "redirect", defaultValue = "list") String redirect,
         RedirectAttributes redirectAttributes
     ) {
         taskService.changeStatus(principal.getId(), id, status, version);
         redirectAttributes.addFlashAttribute("success", "Task status updated.");
-        return "redirect:/tasks";
+        return "detail".equalsIgnoreCase(redirect) ? "redirect:/tasks/" + id : "redirect:/tasks";
     }
 
     @PostMapping("/tasks/{id}/delete")

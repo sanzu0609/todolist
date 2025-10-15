@@ -200,8 +200,8 @@ subtask/
 - [x] Flash message cho create/update/delete.
 
 **T3.2 — Task Detail + Subtasks Panel**
-- [ ] `task/detail.html` hiển thị task + include `subtask/_list.html` & `_form.html`.
-- [ ] Nút đổi status nhanh ở task.
+- [x] `task/detail.html` hiển thị task + include `subtask/_list.html` & `_form.html`.
+- [x] Nút đổi status nhanh ở task.
 
 **T3.3 — SubtaskController + Fragments**
 - [ ] Controller: create/update/toggle/delete theo routes.

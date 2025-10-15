@@ -1,0 +1,8 @@
+﻿<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="list(subtasks)">
+    <div th:if="${#lists.isEmpty(subtasks)}" class="empty-state">
+        <p>No subtasks yet.</p>
+    </div>
+    <ul th:if="${!#lists.isEmpty(subtasks)}" class="subtask-list">
+        <li th:each="subtask : ${subtasks}" th:text="${subtask.title}"></li>
+    </ul>
+</th:block>

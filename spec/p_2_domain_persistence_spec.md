@@ -232,7 +232,7 @@ public record SubtaskUpdateDto(String title, SubtaskStatus status) {}
 - [x] Tất cả method kiểm tra **ownership** bằng repo finder có `ownerId`.
 
 **T2.6 — Smoke test bằng CommandLineRunner (tạm thời dev)**
-- [ ] (Tuỳ chọn) Tạo vài `Task`/`Subtask` mẫu cho user demo (đã seed ở P1) để kiểm tra mapping & cascade.
+- [x] (Tuỳ chọn) Tạo vài `Task`/`Subtask` mẫu cho user demo (đã seed ở P1) để kiểm tra mapping & cascade.
 
 **T2.7 — Unit tests (Mockito)**
 - [ ] `TaskService`: create (set owner, default status), update (owner-only), changeStatus (auto-complete hoặc guard — stub), delete (cascade), list(filter).

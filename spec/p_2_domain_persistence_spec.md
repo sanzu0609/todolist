@@ -224,7 +224,7 @@ public record SubtaskUpdateDto(String title, SubtaskStatus status) {}
 - [x] `SubtaskRepository` với truy vấn ràng buộc `task.owner.id`.
 
 **T2.4 — DTOs**
-- [ ] Tạo DTO: `TaskCreateDto`, `TaskUpdateDto`, `TaskFilter`, `SubtaskCreateDto`, `SubtaskUpdateDto` + validation annotations.
+- [x] Tạo DTO: `TaskCreateDto`, `TaskUpdateDto`, `TaskFilter`, `SubtaskCreateDto`, `SubtaskUpdateDto` + validation annotations.
 
 **T2.5 — Services (interfaces + impl skeleton)**
 - [ ] `TaskService` + `TaskServiceImpl` (create/update/changeStatus/delete/getOrThrow/list).

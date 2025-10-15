@@ -220,8 +220,8 @@ public record SubtaskUpdateDto(String title, SubtaskStatus status) {}
 - [x] Thêm `@PrePersist/@PreUpdate` set `createdAt/updatedAt` (cho cả 2 entity).
 
 **T2.3 — Repositories**
-- [ ] `TaskRepository` với finder theo `ownerId` + filter + search.
-- [ ] `SubtaskRepository` với truy vấn ràng buộc `task.owner.id`.
+- [x] `TaskRepository` với finder theo `ownerId` + filter + search.
+- [x] `SubtaskRepository` với truy vấn ràng buộc `task.owner.id`.
 
 **T2.4 — DTOs**
 - [ ] Tạo DTO: `TaskCreateDto`, `TaskUpdateDto`, `TaskFilter`, `SubtaskCreateDto`, `SubtaskUpdateDto` + validation annotations.

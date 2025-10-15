@@ -1,4 +1,4 @@
-package org.example.todolist.web;
+﻿package org.example.todolist.web;
 
 import jakarta.validation.Valid;
 import org.example.todolist.domain.dto.SubtaskCreateDto;
@@ -7,11 +7,11 @@ import org.example.todolist.domain.enums.SubtaskStatus;
 import org.example.todolist.security.AppUserDetails;
 import org.example.todolist.service.SubtaskService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller

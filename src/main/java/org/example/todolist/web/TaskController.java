@@ -173,16 +173,7 @@ public class TaskController {
         return "detail".equalsIgnoreCase(redirect) ? "redirect:/tasks/" + id : "redirect:/tasks";
     }
 
-    @PostMapping("/tasks/{id}/delete")
-    public String deleteTask(
-        @AuthenticationPrincipal AppUserDetails principal,
-        @PathVariable("id") Long id,
-        RedirectAttributes redirectAttributes
-    ) {
-        taskService.deleteTask(principal.getId(), id);
-        redirectAttributes.addFlashAttribute("success", "Task deleted.");
-        return "redirect:/tasks";
-    }
+    
 
     private void populateFormModel(Model model, boolean isEdit) {
         model.addAttribute("priorities", Priority.values());

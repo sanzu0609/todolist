@@ -1,5 +1,5 @@
 ﻿<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="form(taskId, newSubtask)">
-    <form th:action="@{|/tasks/${taskId}/subtasks|}" th:object="${newSubtask}" method="post" class="inline-form">
+    <form th:action="@{|/tasks/${taskId}/subtasks|}" th:object="${newSubtask}" method="post" class="inline-form" sec:authorize="isAuthenticated()">
         <label class="sr-only" for="subtaskTitle">Subtask title</label>
         <input id="subtaskTitle" type="text" th:field="*{title}" placeholder="New subtask title">
         <button type="submit" class="btn btn-primary">Add</button>

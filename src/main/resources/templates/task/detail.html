@@ -9,10 +9,7 @@
         <div class="page-actions">
             <a class="btn" th:href="@{/tasks}">Back to list</a>
             <a class="btn btn-secondary" th:href="@{|/tasks/${task.id}/edit|}">Edit</a>
-            <form th:action="@{|/tasks/${task.id}/delete|}" method="post" class="inline-form"
-                  onsubmit="return confirm('Delete this task and all subtasks?');">
-                <button type="submit" class="btn btn-link destructive">Delete</button>
-            </form>
+    
         </div>
     </div>
 
@@ -32,7 +29,7 @@
             </div>
         </dl>
         <div class="status-update">
-            <form th:action="@{|/tasks/${task.id}/status|}" method="post" class="inline-form">
+            <form th:action="@{|/tasks/${task.id}/status|}" method="post" class="inline-form" sec:authorize="isAuthenticated()">
                 <label for="statusSelect">Change status</label>
                 <select id="statusSelect" name="status">
                     <option th:each="statusOpt : ${statuses}"
@@ -54,7 +51,7 @@
 
     <section class="subtask-panel">
         <h2>Subtasks</h2>
-        <div th:replace="subtask/_list :: list(${subtasks})"></div>
+        <div th:replace="subtask/_list :: list(${task.id}, ${subtasks}, ${subtaskStatuses})"></div>
         <div th:replace="subtask/_form :: form(${task.id}, ${newSubtask})"></div>
     </section>
 </section>

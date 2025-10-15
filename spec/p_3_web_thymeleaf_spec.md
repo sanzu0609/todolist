@@ -209,8 +209,8 @@ subtask/
 - [x] `subtask/_form.html`: form thêm/sửa inline.
 
 **T3.4 — Ownership & Security in UI**
-- [ ] Không render action nếu không thuộc owner (giữ code gọn gàng; service vẫn kiểm tra).
-- [ ] Tất cả form POST có CSRF.
+- [x] Không render action nếu không thuộc owner (giữ code gọn gàng; service vẫn kiểm tra).
+- [x] Tất cả form POST có CSRF.
 
 **T3.5 — Optional: Pagination & Sorting Helpers**
 - [ ] Fragment `_pagination.html`.

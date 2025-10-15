@@ -212,40 +212,40 @@ public record SubtaskUpdateDto(String title, SubtaskStatus status) {}
 
 ## 9) Phân rã Task nhỏ (cho AI Agent)
 **T2.1 — Enums**
-- [ ] Tạo `Priority`, `TaskStatus`, `SubtaskStatus` trong `domain/enums`.
+- [x] Tạo `Priority`, `TaskStatus`, `SubtaskStatus` trong `domain/enums`.
 
 **T2.2 — Entities**
-- [ ] Tạo `Task` với các trường & mapping, `@Version`, indexes.
-- [ ] Tạo `Subtask` với mapping về `Task`, indexes.
-- [ ] Thêm `@PrePersist/@PreUpdate` set `createdAt/updatedAt` (cho cả 2 entity).
+- [x] Tạo `Task` với các trường & mapping, `@Version`, indexes.
+- [x] Tạo `Subtask` với mapping về `Task`, indexes.
+- [x] Thêm `@PrePersist/@PreUpdate` set `createdAt/updatedAt` (cho cả 2 entity).
 
 **T2.3 — Repositories**
-- [ ] `TaskRepository` với finder theo `ownerId` + filter + search.
-- [ ] `SubtaskRepository` với truy vấn ràng buộc `task.owner.id`.
+- [x] `TaskRepository` với finder theo `ownerId` + filter + search.
+- [x] `SubtaskRepository` với truy vấn ràng buộc `task.owner.id`.
 
 **T2.4 — DTOs**
-- [ ] Tạo DTO: `TaskCreateDto`, `TaskUpdateDto`, `TaskFilter`, `SubtaskCreateDto`, `SubtaskUpdateDto` + validation annotations.
+- [x] Tạo DTO: `TaskCreateDto`, `TaskUpdateDto`, `TaskFilter`, `SubtaskCreateDto`, `SubtaskUpdateDto` + validation annotations.
 
 **T2.5 — Services (interfaces + impl skeleton)**
-- [ ] `TaskService` + `TaskServiceImpl` (create/update/changeStatus/delete/getOrThrow/list).
-- [ ] `SubtaskService` + `SubtaskServiceImpl` (listByTask/create/update/toggle/delete).
-- [ ] Tất cả method kiểm tra **ownership** bằng repo finder có `ownerId`.
+- [x] `TaskService` + `TaskServiceImpl` (create/update/changeStatus/delete/getOrThrow/list).
+- [x] `SubtaskService` + `SubtaskServiceImpl` (listByTask/create/update/toggle/delete).
+- [x] Tất cả method kiểm tra **ownership** bằng repo finder có `ownerId`.
 
 **T2.6 — Smoke test bằng CommandLineRunner (tạm thời dev)**
-- [ ] (Tuỳ chọn) Tạo vài `Task`/`Subtask` mẫu cho user demo (đã seed ở P1) để kiểm tra mapping & cascade.
+- [x] (Tuỳ chọn) Tạo vài `Task`/`Subtask` mẫu cho user demo (đã seed ở P1) để kiểm tra mapping & cascade.
 
 **T2.7 — Unit tests (Mockito)**
-- [ ] `TaskService`: create (set owner, default status), update (owner-only), changeStatus (auto-complete hoặc guard — stub), delete (cascade), list(filter).
-- [ ] `SubtaskService`: create/update/toggle/delete với ownership check.
+- [x] `TaskService`: create (set owner, default status), update (owner-only), changeStatus (auto-complete hoặc guard — stub), delete (cascade), list(filter).
+- [x] `SubtaskService`: create/update/toggle/delete với ownership check.
 
 ---
 
 ## 10) Acceptance Criteria chi tiết (Checklist)
-- [ ] JPA sinh bảng `tasks` và `subtasks` đúng cột & FK; xoá Task xoá luôn Subtask.
-- [ ] `TaskRepository.findByIdAndOwnerId` và các finder theo owner chạy đúng; không bao giờ trả về tài nguyên không thuộc owner.
-- [ ] `SubtaskRepository.findByIdAndOwnerId` & `findByTaskIdAndOwnerId` hoạt động.
-- [ ] `TaskService`/`SubtaskService` bắt buộc ownership, `@Transactional` đúng chỗ.
-- [ ] `Task` có `@Version` và xử lý được xung đột (sẽ test UI ở P3).
+- [x] JPA sinh bảng `tasks` và `subtasks` đúng cột & FK; xoá Task xoá luôn Subtask.
+- [x] `TaskRepository.findByIdAndOwnerId` và các finder theo owner chạy đúng; không bao giờ trả về tài nguyên không thuộc owner.
+- [x] `SubtaskRepository.findByIdAndOwnerId` & `findByTaskIdAndOwnerId` hoạt động.
+- [x] `TaskService`/`SubtaskService` bắt buộc ownership, `@Transactional` đúng chỗ.
+- [x] `Task` có `@Version` và xử lý được xung đột (sẽ test UI ở P3).
 
 ---
 

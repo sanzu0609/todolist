@@ -41,6 +41,11 @@ public class TaskController {
         this.subtaskService = subtaskService;
     }
 
+    @ModelAttribute("priorities")
+    public Priority[] priorities() {
+        return Priority.values();
+    }
+
     @GetMapping("/tasks")
     public String list(
         @AuthenticationPrincipal AppUserDetails principal,
@@ -57,13 +62,14 @@ public class TaskController {
 
         model.addAttribute("page", page);
         model.addAttribute("filter", filter);
-        model.addAttribute("priorities", Priority.values());
-        model.addAttribute("statuses", TaskStatus.values());
         model.addAttribute("pageable", pageable);
         model.addAttribute("currentSort", currentSort(pageable));
         model.addAttribute("sortDueDate", nextSortParam("dueDate", pageable));
         model.addAttribute("sortPriority", nextSortParam("priority", pageable));
         model.addAttribute("sortCreated", nextSortParam("createdAt", pageable));
+        model.addAttribute("statusOptions", TaskStatus.values());
+        model.addAttribute("subtaskStatuses", SubtaskStatus.values());
+        model.addAttribute("priorities", Priority.values());
 
         return "task/list";
     }
@@ -73,7 +79,9 @@ public class TaskController {
         if (!model.containsAttribute("form")) {
             model.addAttribute("form", new TaskCreateDto("", "", Priority.MEDIUM, null));
         }
-        populateFormModel(model, false);
+        model.addAttribute("isEdit", false);
+        model.addAttribute("statusOptions", TaskStatus.values());
+        model.addAttribute("priorities", Priority.values());
         model.addAttribute("formAction", "/tasks");
         model.addAttribute("formTitle", "Create Task");
         return "task/form";
@@ -88,7 +96,9 @@ public class TaskController {
         Model model
     ) {
         if (bindingResult.hasErrors()) {
-            populateFormModel(model, false);
+            model.addAttribute("isEdit", false);
+        model.addAttribute("statusOptions", TaskStatus.values());
+        model.addAttribute("priorities", Priority.values());
             model.addAttribute("formAction", "/tasks");
             model.addAttribute("formTitle", "Create Task");
             return "task/form";
@@ -107,13 +117,16 @@ public class TaskController {
     ) {
         Task task = taskService.getTask(principal.getId(), id);
         model.addAttribute("task", task);
-        model.addAttribute("statuses", TaskStatus.values());
+        model.addAttribute("subtasks", subtaskService.listByTask(principal.getId(), id));
+        model.addAttribute("statusOptions", TaskStatus.values());
         model.addAttribute("subtaskStatuses", SubtaskStatus.values());
         model.addAttribute("priorities", Priority.values());
-        model.addAttribute("subtasks", subtaskService.listByTask(principal.getId(), id));
         if (!model.containsAttribute("newSubtask")) {
             model.addAttribute("newSubtask", new SubtaskCreateDto(""));
         }
+        model.addAttribute("statusOptions", TaskStatus.values());
+        model.addAttribute("subtaskStatuses", SubtaskStatus.values());
+        model.addAttribute("priorities", Priority.values());
         return "task/detail";
     }
 
@@ -135,7 +148,9 @@ public class TaskController {
             );
             model.addAttribute("form", dto);
         }
-        populateFormModel(model, true);
+        model.addAttribute("isEdit", true);
+        model.addAttribute("statusOptions", TaskStatus.values());
+        model.addAttribute("priorities", Priority.values());
         model.addAttribute("formAction", "/tasks/" + id);
         model.addAttribute("formTitle", "Edit Task");
         model.addAttribute("taskId", id);
@@ -152,7 +167,9 @@ public class TaskController {
         Model model
     ) {
         if (bindingResult.hasErrors()) {
-            populateFormModel(model, true);
+            model.addAttribute("isEdit", true);
+        model.addAttribute("statusOptions", TaskStatus.values());
+        model.addAttribute("priorities", Priority.values());
             model.addAttribute("formAction", "/tasks/" + id);
             model.addAttribute("formTitle", "Edit Task");
             model.addAttribute("taskId", id);
@@ -187,12 +204,6 @@ public class TaskController {
         taskService.deleteTask(principal.getId(), id);
         redirectAttributes.addFlashAttribute("success", "Task deleted.");
         return "redirect:/tasks";
-    }
-
-    private void populateFormModel(Model model, boolean isEdit) {
-        model.addAttribute("priorities", Priority.values());
-        model.addAttribute("statuses", TaskStatus.values());
-        model.addAttribute("isEdit", isEdit);
     }
 
     private String normalize(String value) {

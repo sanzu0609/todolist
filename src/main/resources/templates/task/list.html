@@ -77,11 +77,7 @@
             <td class="actions">
                 <a class="btn btn-link" th:href="@{|/tasks/${task.id}|}">View</a>
                 <a class="btn btn-link" th:href="@{|/tasks/${task.id}/edit|}">Edit</a>
-                <form th:action="@{|/tasks/${task.id}/delete|}" method="post" class="inline-form" sec:authorize="isAuthenticated()"
-                      onsubmit="return confirm('Delete this task and all subtasks?');">
-                    <button type="submit" class="btn btn-link destructive">Delete</button>
-                </form>
-
+                
             </td>
         </tr>
         </tbody>

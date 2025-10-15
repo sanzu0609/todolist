@@ -213,8 +213,8 @@ subtask/
 - [x] Tất cả form POST có CSRF.
 
 **T3.5 — Optional: Pagination & Sorting Helpers**
-- [ ] Fragment `_pagination.html`.
-- [ ] Helper build URL giữ nguyên params khi đổi trang/sort.
+- [x] Fragment `_pagination.html`.
+- [x] Helper build URL giữ nguyên params khi đổi trang/sort.
 
 **T3.6 — Validation UX**
 - [ ] Hiển thị `th:errors` tại từng input.

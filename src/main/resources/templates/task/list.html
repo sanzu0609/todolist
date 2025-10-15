@@ -50,10 +50,10 @@
     <table class="table" th:if="${!page.content.isEmpty()}">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>Priority</th>
+            <th><a th:href="@{/tasks(status=${filter.status()}, priority=${filter.priority()}, dueOnOrBefore=${filter.dueOnOrBefore()}, q=${filter.q()}, sort=${sortCreated})}">Title</a></th>
+            <th><a th:href="@{/tasks(status=${filter.status()}, priority=${filter.priority()}, dueOnOrBefore=${filter.dueOnOrBefore()}, q=${filter.q()}, sort=${sortPriority})}">Priority</a></th>
             <th>Status</th>
-            <th>Due Date</th>
+            <th><a th:href="@{/tasks(status=${filter.status()}, priority=${filter.priority()}, dueOnOrBefore=${filter.dueOnOrBefore()}, q=${filter.q()}, sort=${sortDueDate})}">Due Date</a></th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -86,5 +86,6 @@
         </tr>
         </tbody>
     </table>
+    <div th:replace="fragments/_pagination :: pagination(${page}, ${filter}, ${pageable}, ${currentSort})"></div>
 </section>
 </html>

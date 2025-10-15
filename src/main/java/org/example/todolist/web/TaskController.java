@@ -1,4 +1,4 @@
-package org.example.todolist.web;
+﻿package org.example.todolist.web;
 
 import jakarta.validation.Valid;
 import java.time.LocalDate;
@@ -9,13 +9,14 @@ import org.example.todolist.domain.dto.TaskFilter;
 import org.example.todolist.domain.dto.TaskUpdateDto;
 import org.example.todolist.domain.entity.Task;
 import org.example.todolist.domain.enums.Priority;
-import org.example.todolist.domain.enums.TaskStatus;
 import org.example.todolist.domain.enums.SubtaskStatus;
+import org.example.todolist.domain.enums.TaskStatus;
 import org.example.todolist.security.AppUserDetails;
 import org.example.todolist.service.SubtaskService;
 import org.example.todolist.service.TaskService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -58,7 +59,11 @@ public class TaskController {
         model.addAttribute("filter", filter);
         model.addAttribute("priorities", Priority.values());
         model.addAttribute("statuses", TaskStatus.values());
-        model.addAttribute("subtaskStatuses", SubtaskStatus.values());
+        model.addAttribute("pageable", pageable);
+        model.addAttribute("currentSort", currentSort(pageable));
+        model.addAttribute("sortDueDate", nextSortParam("dueDate", pageable));
+        model.addAttribute("sortPriority", nextSortParam("priority", pageable));
+        model.addAttribute("sortCreated", nextSortParam("createdAt", pageable));
 
         return "task/list";
     }
@@ -173,12 +178,20 @@ public class TaskController {
         return "detail".equalsIgnoreCase(redirect) ? "redirect:/tasks/" + id : "redirect:/tasks";
     }
 
-    
+    @PostMapping("/tasks/{id}/delete")
+    public String deleteTask(
+        @AuthenticationPrincipal AppUserDetails principal,
+        @PathVariable("id") Long id,
+        RedirectAttributes redirectAttributes
+    ) {
+        taskService.deleteTask(principal.getId(), id);
+        redirectAttributes.addFlashAttribute("success", "Task deleted.");
+        return "redirect:/tasks";
+    }
 
     private void populateFormModel(Model model, boolean isEdit) {
         model.addAttribute("priorities", Priority.values());
         model.addAttribute("statuses", TaskStatus.values());
-        model.addAttribute("subtaskStatuses", SubtaskStatus.values());
         model.addAttribute("isEdit", isEdit);
     }
 
@@ -188,5 +201,19 @@ public class TaskController {
         }
         String trimmed = value.trim();
         return trimmed.isEmpty() ? null : trimmed;
+    }
+
+    private String currentSort(Pageable pageable) {
+        return pageable.getSort().stream().findFirst()
+            .map(order -> order.getProperty() + "," + order.getDirection().name().toLowerCase())
+            .orElse(null);
+    }
+
+    private String nextSortParam(String property, Pageable pageable) {
+        Sort.Order order = pageable.getSort().getOrderFor(property);
+        if (order == null || order.getDirection() == Sort.Direction.DESC) {
+            return property + ",asc";
+        }
+        return property + ",desc";
     }
 }

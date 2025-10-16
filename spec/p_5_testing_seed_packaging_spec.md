@@ -171,9 +171,9 @@ Thêm các mục:
 - [x] Tạo `DevDataSeeder` (profile `dev`) seed users/tasks/subtasks.
 
 **T5.2 — Unit Tests (Service)**
-- [ ] Viết `UserServiceTest`.
-- [ ] Viết `TaskServiceTest`.
-- [ ] Viết `SubtaskServiceTest`.
+- [x] Viết `UserServiceTest`.
+- [x] Viết `TaskServiceTest`.
+- [x] Viết `SubtaskServiceTest`.
 
 **T5.3 — Integration Tests (MockMvc)**
 - [ ] `AuthFlowIT`.

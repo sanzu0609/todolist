@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -56,7 +55,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void createTaskSetsOwnerAndDefaults() {
+    void create_setsOwner_andDefaultStatusTODO() {
         TaskCreateDto dto = new TaskCreateDto(
             "  Plan sprint  ",
             " Discuss with the team ",
@@ -88,7 +87,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void createTaskThrowsWhenOwnerMissing() {
+    void create_rejects_whenOwnerMissing() {
         when(userRepository.findById(99L)).thenReturn(Optional.empty());
 
         TaskCreateDto dto = new TaskCreateDto("Title", null, Priority.LOW, null);
@@ -98,7 +97,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void updateTaskAppliesChangesWhenVersionMatches() {
+    void update_appliesChanges_whenVersionMatches() {
         Task task = new Task();
         task.setOwner(owner);
         ReflectionTestUtils.setField(task, "version", 5L);
@@ -124,7 +123,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void updateTaskThrowsWhenVersionMismatch() {
+    void update_rejects_whenVersionMismatch() {
         Task task = new Task();
         task.setOwner(owner);
         ReflectionTestUtils.setField(task, "version", 3L);
@@ -143,12 +142,28 @@ class TaskServiceTest {
     }
 
     @Test
-    void changeStatusRejectsNull() {
+    void update_rejects_whenNotOwner() {
+        when(taskRepository.findByIdAndOwnerId(10L, 42L)).thenReturn(Optional.empty());
+
+        TaskUpdateDto dto = new TaskUpdateDto(
+            "Title",
+            "Desc",
+            Priority.MEDIUM,
+            null,
+            TaskStatus.IN_PROGRESS,
+            1L
+        );
+
+        assertThrows(EntityNotFoundException.class, () -> taskService.updateTask(42L, 10L, dto));
+    }
+
+    @Test
+    void changeStatus_rejects_nullStatus() {
         assertThrows(BusinessException.class, () -> taskService.changeStatus(42L, 9L, null, 1L));
     }
 
     @Test
-    void changeStatusUpdatesWhenVersionMatches() {
+    void changeStatus_toDone_appliesPolicy() {
         Task task = new Task();
         ReflectionTestUtils.setField(task, "version", 1L);
         when(taskRepository.findByIdAndOwnerId(7L, 42L)).thenReturn(Optional.of(task));
@@ -159,7 +174,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void deleteTaskRemovesEntity() {
+    void delete_cascadeSubtasks_deletesTaskEntity() {
         Task task = new Task();
         when(taskRepository.findByIdAndOwnerId(3L, 42L)).thenReturn(Optional.of(task));
 
@@ -169,19 +184,33 @@ class TaskServiceTest {
     }
 
     @Test
-    void listTasksUsesSearchWhenQueryPresent() {
-        TaskFilter filter = new TaskFilter(null, null, null, " sprint ");
-        when(taskRepository.searchByTitle(42L, "sprint", PageRequest.of(0, 10)))
-            .thenReturn(Page.empty());
+    void list_filtersByOwner_andAppliesFilterAndSort() {
+        PageRequest pageable = PageRequest.of(0, 10);
 
-        taskService.listTasks(42L, filter, PageRequest.of(0, 10));
+        TaskFilter queryFilter = new TaskFilter(null, null, null, " sprint ");
+        when(taskRepository.searchByTitle(42L, "sprint", pageable)).thenReturn(Page.empty());
+        taskService.listTasks(42L, queryFilter, pageable);
+        TaskFilter statusFilter = new TaskFilter(TaskStatus.IN_PROGRESS, null, null, null);
+        when(taskRepository.findByOwnerIdAndStatus(42L, TaskStatus.IN_PROGRESS, pageable)).thenReturn(Page.empty());
+        taskService.listTasks(42L, statusFilter, pageable);
 
-        verify(taskRepository).searchByTitle(42L, "sprint", PageRequest.of(0, 10));
+        TaskFilter priorityFilter = new TaskFilter(null, Priority.URGENT, null, null);
+        when(taskRepository.findByOwnerIdAndPriority(42L, Priority.URGENT, pageable)).thenReturn(Page.empty());
+        taskService.listTasks(42L, priorityFilter, pageable);
+
+        TaskFilter dueFilter = new TaskFilter(null, null, LocalDate.now(), null);
+        when(taskRepository.findByOwnerIdAndDueDateLessThanEqual(42L, dueFilter.dueOnOrBefore(), pageable)).thenReturn(Page.empty());
+        taskService.listTasks(42L, dueFilter, pageable);
+
+        verify(taskRepository).searchByTitle(42L, "sprint", pageable);
+        verify(taskRepository).findByOwnerIdAndStatus(42L, TaskStatus.IN_PROGRESS, pageable);
+        verify(taskRepository).findByOwnerIdAndPriority(42L, Priority.URGENT, pageable);
+        verify(taskRepository).findByOwnerIdAndDueDateLessThanEqual(42L, dueFilter.dueOnOrBefore(), pageable);
         verifyNoMoreInteractions(taskRepository);
     }
 
     @Test
-    void listTasksReturnsByOwnerWhenFilterNull() {
+    void list_returnsByOwner_whenFilterNull() {
         Page<Task> page = new PageImpl<>(java.util.List.of());
         when(taskRepository.findByOwnerId(42L, PageRequest.of(0, 5))).thenReturn(page);
 
@@ -192,7 +221,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void getTaskThrowsWhenMissing() {
+    void getTask_throwsWhenMissing() {
         when(taskRepository.findByIdAndOwnerId(55L, 42L)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> taskService.getTask(42L, 55L));

@@ -12,6 +12,7 @@ import org.example.todolist.domain.dto.PasswordChangeForm;
 import org.example.todolist.domain.dto.ProfileForm;
 import org.example.todolist.domain.dto.RegisterForm;
 import org.example.todolist.domain.entity.User;
+import org.example.todolist.domain.enums.Role;
 import org.example.todolist.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +35,7 @@ class UserServiceTest {
     private UserService userService;
 
     @Test
-    void registerCreatesUserWhenDataValid() {
+    void register_success_encodesPassword_andAssignsRoleUser() {
         RegisterForm form = new RegisterForm();
         form.setUsername("newuser");
         form.setPassword("Password123");
@@ -54,10 +55,11 @@ class UserServiceTest {
         assertThat(saved.getUsername()).isEqualTo("newuser");
         assertThat(persisted.getPasswordHash()).isEqualTo("ENCODED");
         assertThat(saved.getDisplayName()).isEqualTo("New User");
+        assertThat(saved.getRole()).isEqualTo(Role.USER);
     }
 
     @Test
-    void registerThrowsWhenUsernameTaken() {
+    void register_rejects_duplicateUsername() {
         RegisterForm form = new RegisterForm();
         form.setUsername("existing");
         form.setPassword("Password123");
@@ -70,7 +72,7 @@ class UserServiceTest {
     }
 
     @Test
-    void registerThrowsWhenConfirmationMismatch() {
+    void register_rejects_whenConfirmationMismatch() {
         RegisterForm form = new RegisterForm();
         form.setUsername("user");
         form.setPassword("Password123");
@@ -112,7 +114,7 @@ class UserServiceTest {
     }
 
     @Test
-    void changePasswordUpdatesHashWhenOldMatches() {
+    void changePassword_success_updatesHash() {
         User user = new User();
         user.setUsername("user");
         user.setPasswordHash("OLD_HASH");
@@ -132,7 +134,7 @@ class UserServiceTest {
     }
 
     @Test
-    void changePasswordThrowsWhenOldPasswordIncorrect() {
+    void changePassword_rejects_whenOldPasswordWrong() {
         User user = new User();
         user.setPasswordHash("OLD_HASH");
 
@@ -148,7 +150,7 @@ class UserServiceTest {
     }
 
     @Test
-    void changePasswordThrowsWhenConfirmationMismatch() {
+    void changePassword_rejects_whenConfirmationMismatch() {
         User user = new User();
         user.setPasswordHash("OLD_HASH");
 

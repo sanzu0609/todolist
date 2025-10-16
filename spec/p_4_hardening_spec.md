@@ -123,8 +123,8 @@ Mục tiêu P4: Làm **cứng** hệ thống trước khi viết test tổng (P5
 - [x] Tạo các class: `EntityNotFoundException`, `AccessDeniedBusinessException`, `BusinessException`, `OptimisticLockingAppException`.
 
 **T4.2 — GlobalExceptionHandler**
-- [ ] Implement `@ControllerAdvice` map lỗi → view + status.
-- [ ] Chuẩn hoá thông điệp (Model attrs) & flash khi redirect.
+- [x] Implement `@ControllerAdvice` map lỗi → view + status.
+- [x] Chuẩn hoá thông điệp (Model attrs) & flash khi redirect.
 
 **T4.3 — Ownership Audit**
 - [ ] Rà soát repo/service, thay tất cả `findById` trần bằng phiên bản có `ownerId`.

@@ -127,8 +127,8 @@ Mục tiêu P4: Làm **cứng** hệ thống trước khi viết test tổng (P5
 - [x] Chuẩn hoá thông điệp (Model attrs) & flash khi redirect.
 
 **T4.3 — Ownership Audit**
-- [ ] Rà soát repo/service, thay tất cả `findById` trần bằng phiên bản có `ownerId`.
-- [ ] Thêm unit test nhỏ mô phỏng truy cập chéo user ⇒ 404/403.
+- [x] Rà soát repo/service, thay tất cả `findById` trần bằng phiên bản có `ownerId`.
+- [x] Thêm unit test nhỏ mô phỏng truy cập chéo user ⇒ 404/403.
 
 **T4.4 — Error Pages**
 - [ ] Tạo `templates/error/{403,404,409,422,500}.html` theo layout.

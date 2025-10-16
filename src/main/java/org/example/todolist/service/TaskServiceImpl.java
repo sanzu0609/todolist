@@ -1,6 +1,8 @@
 package org.example.todolist.service;
 
-import jakarta.persistence.EntityNotFoundException;
+import org.example.todolist.exception.EntityNotFoundException;
+import org.example.todolist.exception.BusinessException;
+import org.example.todolist.exception.OptimisticLockingAppException;
 import java.time.LocalDate;
 import java.util.Objects;
 import org.example.todolist.domain.dto.TaskCreateDto;
@@ -11,7 +13,6 @@ import org.example.todolist.domain.entity.User;
 import org.example.todolist.domain.enums.TaskStatus;
 import org.example.todolist.repository.TaskRepository;
 import org.example.todolist.repository.UserRepository;
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task changeStatus(Long ownerId, Long taskId, TaskStatus status, Long expectedVersion) {
         if (status == null) {
-            throw new IllegalArgumentException("Task status must not be null");
+            throw new BusinessException("Task status must not be null");
         }
         Task task = getTaskForOwner(ownerId, taskId);
         assertVersion(task.getVersion(), expectedVersion);
@@ -121,13 +122,13 @@ public class TaskServiceImpl implements TaskService {
             return;
         }
         if (!Objects.equals(currentVersion, expectedVersion)) {
-            throw new OptimisticLockingFailureException("Task has been modified by another transaction");
+            throw new OptimisticLockingAppException("Task has been modified by another transaction.");
         }
     }
 
     private String normalizeRequired(String value, String fieldName) {
         if (!StringUtils.hasText(value)) {
-            throw new IllegalArgumentException("Task " + fieldName + " must not be blank");
+            throw new BusinessException("Task " + fieldName + " must not be blank");
         }
         return value.trim();
     }

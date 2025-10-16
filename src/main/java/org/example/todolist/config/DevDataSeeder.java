@@ -2,84 +2,130 @@ package org.example.todolist.config;
 
 import java.time.LocalDate;
 import java.util.List;
-import org.example.todolist.domain.dto.RegisterForm;
-import org.example.todolist.domain.dto.SubtaskCreateDto;
-import org.example.todolist.domain.dto.TaskCreateDto;
+import org.example.todolist.domain.entity.Subtask;
+import org.example.todolist.domain.entity.Task;
+import org.example.todolist.domain.entity.User;
 import org.example.todolist.domain.enums.Priority;
-import org.example.todolist.service.SubtaskService;
-import org.example.todolist.service.TaskService;
-import org.example.todolist.service.UserService;
+import org.example.todolist.domain.enums.Role;
+import org.example.todolist.domain.enums.SubtaskStatus;
+import org.example.todolist.domain.enums.TaskStatus;
+import org.example.todolist.repository.SubtaskRepository;
+import org.example.todolist.repository.TaskRepository;
 import org.example.todolist.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Profile("dev")
+@Transactional
 public class DevDataSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
-    private final UserService userService;
-    private final TaskService taskService;
-    private final SubtaskService subtaskService;
+    private final TaskRepository taskRepository;
+    private final SubtaskRepository subtaskRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public DevDataSeeder(
         UserRepository userRepository,
-        UserService userService,
-        TaskService taskService,
-        SubtaskService subtaskService
+        TaskRepository taskRepository,
+        SubtaskRepository subtaskRepository,
+        PasswordEncoder passwordEncoder
     ) {
         this.userRepository = userRepository;
-        this.userService = userService;
-        this.taskService = taskService;
-        this.subtaskService = subtaskService;
+        this.taskRepository = taskRepository;
+        this.subtaskRepository = subtaskRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void run(String... args) {
-        Long demoUserId = ensureDemoUser();
-        seedTasks(demoUserId);
+        User demo = ensureUser("demo", "demo1234", "Demo User");
+        seedSampleTasks(demo);
+
+        User alice = ensureUser("alice", "alice1234", "Alice");
+        seedSampleTasks(alice);
     }
 
-    private Long ensureDemoUser() {
-        return userRepository.findByUsername("demo")
-            .map(user -> user.getId())
+    private User ensureUser(String username, String rawPassword, String displayName) {
+        return userRepository.findByUsername(username.trim())
             .orElseGet(() -> {
-                RegisterForm form = new RegisterForm();
-                form.setUsername("demo");
-                form.setPassword("demo1234");
-                form.setConfirmPassword("demo1234");
-                form.setDisplayName("Demo User");
-                return userService.register(form).getId();
+                User user = new User();
+                user.setUsername(username.trim());
+                user.setPasswordHash(passwordEncoder.encode(rawPassword));
+                user.setDisplayName(displayName);
+                user.setRole(Role.USER);
+                return userRepository.save(user);
             });
     }
 
-    private void seedTasks(Long ownerId) {
-        if (!taskService.listTasks(ownerId, null, org.springframework.data.domain.PageRequest.of(0, 1)).isEmpty()) {
+    private void seedSampleTasks(User owner) {
+        LocalDate today = LocalDate.now();
+        List<TaskSeed> seeds = List.of(
+            new TaskSeed(
+                "Hoc Spring",
+                "Lam quen Spring Framework va cac khai niem cot loi.",
+                Priority.HIGH,
+                TaskStatus.IN_PROGRESS,
+                today.plusDays(3),
+                List.of(
+                    new SubtaskSeed("Doc ve DI", SubtaskStatus.DONE),
+                    new SubtaskSeed("Viet demo @Service", SubtaskStatus.TODO)
+                )
+            ),
+            new TaskSeed(
+                "Don CV",
+                "Chuan bi CV moi nhat de apply cong viec.",
+                Priority.MEDIUM,
+                TaskStatus.TODO,
+                today.plusDays(7),
+                List.of(new SubtaskSeed("Cap nhat du an Todo", SubtaskStatus.TODO))
+            )
+        );
+
+        seeds.forEach(seed -> ensureTask(owner, seed));
+    }
+
+    private void ensureTask(User owner, TaskSeed seed) {
+        Task task = taskRepository.findByOwnerIdAndTitle(owner.getId(), seed.title())
+            .orElseGet(() -> createTask(owner, seed));
+
+        seed.subtasks().forEach(subtaskSeed -> ensureSubtask(task, subtaskSeed));
+    }
+
+    private Task createTask(User owner, TaskSeed seed) {
+        Task task = new Task();
+        task.setOwner(owner);
+        task.setTitle(seed.title());
+        task.setDescription(seed.description());
+        task.setPriority(seed.priority());
+        task.setStatus(seed.status());
+        task.setDueDate(seed.dueDate());
+        return taskRepository.save(task);
+    }
+
+    private void ensureSubtask(Task task, SubtaskSeed seed) {
+        if (subtaskRepository.existsByTaskIdAndTitle(task.getId(), seed.title())) {
             return;
         }
-
-        TaskCreateDto todayTask = new TaskCreateDto(
-            "Plan sprint backlog",
-            "Review tasks with the team and prioritize the next sprint backlog.",
-            Priority.HIGH,
-            LocalDate.now()
-        );
-        Long planningTaskId = taskService.createTask(ownerId, todayTask).getId();
-
-        List.of("Review previous sprint", "Collect new requirements", "Draft sprint goal")
-            .forEach(title -> subtaskService.createSubtask(ownerId, planningTaskId, new SubtaskCreateDto(title)));
-
-        TaskCreateDto upcomingTask = new TaskCreateDto(
-            "Build task management module",
-            "Implement task CRUD, filtering, and ownership enforcement.",
-            Priority.MEDIUM,
-            LocalDate.now().plusDays(5)
-        );
-        Long buildTaskId = taskService.createTask(ownerId, upcomingTask).getId();
-
-        subtaskService.createSubtask(ownerId, buildTaskId, new SubtaskCreateDto("Design database schema"));
-        subtaskService.createSubtask(ownerId, buildTaskId, new SubtaskCreateDto("Implement repository layer"));
-        subtaskService.createSubtask(ownerId, buildTaskId, new SubtaskCreateDto("Wire service layer"));
+        Subtask subtask = new Subtask();
+        subtask.setTask(task);
+        subtask.setTitle(seed.title());
+        subtask.setStatus(seed.status());
+        Subtask saved = subtaskRepository.save(subtask);
+        task.getSubtasks().add(saved);
     }
+
+    private record TaskSeed(
+        String title,
+        String description,
+        Priority priority,
+        TaskStatus status,
+        LocalDate dueDate,
+        List<SubtaskSeed> subtasks
+    ) {}
+
+    private record SubtaskSeed(String title, SubtaskStatus status) {}
 }

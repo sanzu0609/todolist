@@ -168,7 +168,7 @@ Thêm các mục:
 
 ## 7) Phân rã Task nhỏ (cho AI Agent)
 **T5.1 — DevDataSeeder**
-- [ ] Tạo `DevDataSeeder` (profile `dev`) seed users/tasks/subtasks.
+- [x] Tạo `DevDataSeeder` (profile `dev`) seed users/tasks/subtasks.
 
 **T5.2 — Unit Tests (Service)**
 - [ ] Viết `UserServiceTest`.
@@ -211,4 +211,3 @@ Thêm các mục:
 - T5.4–T5.5: ~0.25–0.5 ngày
 
 > Tổng P5: **~1.0–1.5 ngày** tập trung.
-

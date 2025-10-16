@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="_layout :: layout(~{::section}, 'Conflict')">
+<section th:fragment="section" class="page-container">
+    <h1>Update conflict</h1>
+    <p th:text="${message} ?: 'This resource was updated elsewhere. Please reload and try again.'"></p>
+    <a class="btn" th:href="@{/tasks}">Back to tasks</a>
+</section>
+</html>

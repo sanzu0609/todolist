@@ -18,6 +18,7 @@ import org.example.todolist.domain.entity.Task;
 import org.example.todolist.domain.enums.SubtaskStatus;
 import org.example.todolist.repository.SubtaskRepository;
 import org.example.todolist.repository.TaskRepository;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -184,8 +184,8 @@ Thêm các mục:
 - [x] Thêm plugin jacoco, tạo report.
 
 **T5.5 — Packaging & README**
-- [ ] `mvn package` và thử chạy jar với `--spring.profiles.active=dev`.
-- [ ] Cập nhật README với hướng dẫn chạy + ảnh UI.
+- [x] `mvn package` và thử chạy jar với `--spring.profiles.active=dev`.
+- [x] Cập nhật README với hướng dẫn chạy + ảnh UI.
 
 ---
 
@@ -193,8 +193,8 @@ Thêm các mục:
 - [ ] Seed dev tạo thành công `demo`, `alice` và data mẫu (không bị duplicate mỗi lần chạy).
 - [ ] All unit tests pass; bao phủ các rule: ownership, status-change policy, optimistic locking, validation.
 - [ ] All integration tests pass; luồng đăng nhập/CRUD/ownership hoạt động.
-- [ ] `mvn package` sinh jar chạy được; start app với profile `dev` OK.
-- [ ] README đầy đủ, người mới clone repo chạy được trong 5 phút.
+- [x] `mvn package` sinh jar chạy được; start app với profile `dev` OK.
+- [x] README đầy đủ, người mới clone repo chạy được trong 5 phút.
 
 ---
 

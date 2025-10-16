@@ -9,23 +9,23 @@ import org.example.todolist.domain.enums.TaskStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public record TaskUpdateDto(
-    @NotBlank
+    @NotBlank(message="{NotBlank.task.title}")
     @Size(max = 255)
     String title,
 
     @Size(max = 5000)
     String description,
 
-    @NotNull
+    @NotNull(message="{NotNull.task.priority}")
     Priority priority,
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     LocalDate dueDate,
 
-    @NotNull
+    @NotNull(message="{NotNull.task.status}")
     TaskStatus status,
 
-    @NotNull
+    @NotNull(message="{NotNull.task.version}")
     Long version
 ) {
 }

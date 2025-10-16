@@ -120,7 +120,7 @@ Mục tiêu P4: Làm **cứng** hệ thống trước khi viết test tổng (P5
 
 ## 8) Phân rã Task nhỏ (cho AI Agent)
 **T4.1 — Exceptions**
-- [ ] Tạo các class: `EntityNotFoundException`, `AccessDeniedBusinessException`, `BusinessException`, `OptimisticLockingAppException`.
+- [x] Tạo các class: `EntityNotFoundException`, `AccessDeniedBusinessException`, `BusinessException`, `OptimisticLockingAppException`.
 
 **T4.2 — GlobalExceptionHandler**
 - [ ] Implement `@ControllerAdvice` map lỗi → view + status.

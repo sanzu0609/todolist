@@ -180,8 +180,8 @@ Thêm các mục:
 - [x] `TaskCrudIT`.
 - [x] `SubtaskFlowIT`.
 
-**T5.4 — Jacoco (tuỳ chọn)**
-- [ ] Thêm plugin jacoco, tạo report.
+**T5.4 — Jacoco (tùy chọn)**
+- [x] Thêm plugin jacoco, tạo report.
 
 **T5.5 — Packaging & README**
 - [ ] `mvn package` và thử chạy jar với `--spring.profiles.active=dev`.

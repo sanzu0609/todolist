@@ -168,24 +168,24 @@ Thêm các mục:
 
 ## 7) Phân rã Task nhỏ (cho AI Agent)
 **T5.1 — DevDataSeeder**
-- [ ] Tạo `DevDataSeeder` (profile `dev`) seed users/tasks/subtasks.
+- [x] Tạo `DevDataSeeder` (profile `dev`) seed users/tasks/subtasks.
 
 **T5.2 — Unit Tests (Service)**
-- [ ] Viết `UserServiceTest`.
-- [ ] Viết `TaskServiceTest`.
-- [ ] Viết `SubtaskServiceTest`.
+- [x] Viết `UserServiceTest`.
+- [x] Viết `TaskServiceTest`.
+- [x] Viết `SubtaskServiceTest`.
 
 **T5.3 — Integration Tests (MockMvc)**
-- [ ] `AuthFlowIT`.
-- [ ] `TaskCrudIT`.
-- [ ] `SubtaskFlowIT`.
+- [x] `AuthFlowIT`.
+- [x] `TaskCrudIT`.
+- [x] `SubtaskFlowIT`.
 
-**T5.4 — Jacoco (tuỳ chọn)**
-- [ ] Thêm plugin jacoco, tạo report.
+**T5.4 — Jacoco (tùy chọn)**
+- [x] Thêm plugin jacoco, tạo report.
 
 **T5.5 — Packaging & README**
-- [ ] `mvn package` và thử chạy jar với `--spring.profiles.active=dev`.
-- [ ] Cập nhật README với hướng dẫn chạy + ảnh UI.
+- [x] `mvn package` và thử chạy jar với `--spring.profiles.active=dev`.
+- [x] Cập nhật README với hướng dẫn chạy + ảnh UI.
 
 ---
 
@@ -193,8 +193,8 @@ Thêm các mục:
 - [ ] Seed dev tạo thành công `demo`, `alice` và data mẫu (không bị duplicate mỗi lần chạy).
 - [ ] All unit tests pass; bao phủ các rule: ownership, status-change policy, optimistic locking, validation.
 - [ ] All integration tests pass; luồng đăng nhập/CRUD/ownership hoạt động.
-- [ ] `mvn package` sinh jar chạy được; start app với profile `dev` OK.
-- [ ] README đầy đủ, người mới clone repo chạy được trong 5 phút.
+- [x] `mvn package` sinh jar chạy được; start app với profile `dev` OK.
+- [x] README đầy đủ, người mới clone repo chạy được trong 5 phút.
 
 ---
 
@@ -211,4 +211,3 @@ Thêm các mục:
 - T5.4–T5.5: ~0.25–0.5 ngày
 
 > Tổng P5: **~1.0–1.5 ngày** tập trung.
-

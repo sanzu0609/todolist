@@ -25,4 +25,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query("select t from Task t where t.owner.id = :ownerId and lower(t.title) like lower(concat('%', :q, '%'))")
     Page<Task> searchByTitle(@Param("ownerId") Long ownerId, @Param("q") String query, Pageable pageable);
+
+    Optional<Task> findByOwnerIdAndTitle(Long ownerId, String title);
 }

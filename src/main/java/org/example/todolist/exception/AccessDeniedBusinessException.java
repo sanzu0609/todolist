@@ -1,4 +1,4 @@
-﻿package org.example.todolist.exception;
+package org.example.todolist.exception;
 
 public class AccessDeniedBusinessException extends RuntimeException {
 

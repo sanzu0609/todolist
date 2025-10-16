@@ -176,9 +176,9 @@ Thêm các mục:
 - [x] Viết `SubtaskServiceTest`.
 
 **T5.3 — Integration Tests (MockMvc)**
-- [ ] `AuthFlowIT`.
-- [ ] `TaskCrudIT`.
-- [ ] `SubtaskFlowIT`.
+- [x] `AuthFlowIT`.
+- [x] `TaskCrudIT`.
+- [x] `SubtaskFlowIT`.
 
 **T5.4 — Jacoco (tuỳ chọn)**
 - [ ] Thêm plugin jacoco, tạo report.

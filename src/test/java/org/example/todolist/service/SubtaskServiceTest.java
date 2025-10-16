@@ -7,7 +7,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import jakarta.persistence.EntityNotFoundException;
+import org.example.todolist.exception.EntityNotFoundException;
+import org.example.todolist.exception.BusinessException;
 import java.util.List;
 import java.util.Optional;
 import org.example.todolist.domain.dto.SubtaskCreateDto;
@@ -17,6 +18,7 @@ import org.example.todolist.domain.entity.Task;
 import org.example.todolist.domain.enums.SubtaskStatus;
 import org.example.todolist.repository.SubtaskRepository;
 import org.example.todolist.repository.TaskRepository;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +26,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.util.ReflectionTestUtils;
+
 
 @ExtendWith(MockitoExtension.class)
 class SubtaskServiceTest {
@@ -84,7 +86,7 @@ class SubtaskServiceTest {
         when(taskRepository.findByIdAndOwnerId(100L, 42L)).thenReturn(Optional.of(task));
 
         SubtaskCreateDto dto = new SubtaskCreateDto("   ");
-        assertThrows(IllegalArgumentException.class, () -> subtaskService.createSubtask(42L, 100L, dto));
+        assertThrows(BusinessException.class, () -> subtaskService.createSubtask(42L, 100L, dto));
         verify(subtaskRepository, never()).save(any());
     }
 
@@ -115,7 +117,7 @@ class SubtaskServiceTest {
 
     @Test
     void changeStatusRejectsNull() {
-        assertThrows(IllegalArgumentException.class, () -> subtaskService.changeStatus(42L, 1L, null));
+        assertThrows(BusinessException.class, () -> subtaskService.changeStatus(42L, 1L, null));
     }
 
     @Test

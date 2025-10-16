@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record SubtaskCreateDto(
-    @NotBlank
+    @NotBlank(message="{NotBlank.subtask.title}")
     @Size(max = 255)
     String title
 ) {

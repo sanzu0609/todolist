@@ -1,6 +1,7 @@
 package org.example.todolist.service;
 
-import jakarta.persistence.EntityNotFoundException;
+import org.example.todolist.exception.EntityNotFoundException;
+import org.example.todolist.exception.BusinessException;
 import java.util.List;
 import org.example.todolist.domain.dto.SubtaskCreateDto;
 import org.example.todolist.domain.dto.SubtaskUpdateDto;
@@ -55,7 +56,7 @@ public class SubtaskServiceImpl implements SubtaskService {
     @Override
     public Subtask changeStatus(Long ownerId, Long subtaskId, SubtaskStatus status) {
         if (status == null) {
-            throw new IllegalArgumentException("Subtask status must not be null");
+            throw new BusinessException("Subtask status must not be null");
         }
         Subtask subtask = getSubtaskForOwner(ownerId, subtaskId);
         subtask.setStatus(status);
@@ -90,7 +91,7 @@ public class SubtaskServiceImpl implements SubtaskService {
         }
         String trimmed = value.trim();
         if (!StringUtils.hasText(trimmed)) {
-            throw new IllegalArgumentException("Subtask title must not be blank");
+            throw new BusinessException("Subtask title must not be blank");
         }
         return trimmed;
     }

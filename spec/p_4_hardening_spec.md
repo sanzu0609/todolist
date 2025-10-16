@@ -1,4 +1,4 @@
-# Spec Giai Đoạn P4 — Hardening (Error Handling, Ownership Guard, UX & Quality)
+﻿# Spec Giai Đoạn P4 — Hardening (Error Handling, Ownership Guard, UX & Quality)
 
 > Namespace: **`org.example.todolist`**  
 > Phụ thuộc: P0–P3 đã hoàn thành (Auth, Domain, Web UI).
@@ -120,21 +120,21 @@ Mục tiêu P4: Làm **cứng** hệ thống trước khi viết test tổng (P5
 
 ## 8) Phân rã Task nhỏ (cho AI Agent)
 **T4.1 — Exceptions**
-- [ ] Tạo các class: `EntityNotFoundException`, `AccessDeniedBusinessException`, `BusinessException`, `OptimisticLockingAppException`.
+- [x] Tạo các class: `EntityNotFoundException`, `AccessDeniedBusinessException`, `BusinessException`, `OptimisticLockingAppException`.
 
 **T4.2 — GlobalExceptionHandler**
-- [ ] Implement `@ControllerAdvice` map lỗi → view + status.
-- [ ] Chuẩn hoá thông điệp (Model attrs) & flash khi redirect.
+- [x] Implement `@ControllerAdvice` map lỗi → view + status.
+- [x] Chuẩn hoá thông điệp (Model attrs) & flash khi redirect.
 
 **T4.3 — Ownership Audit**
-- [ ] Rà soát repo/service, thay tất cả `findById` trần bằng phiên bản có `ownerId`.
-- [ ] Thêm unit test nhỏ mô phỏng truy cập chéo user ⇒ 404/403.
+- [x] Rà soát repo/service, thay tất cả `findById` trần bằng phiên bản có `ownerId`.
+- [x] Thêm unit test nhỏ mô phỏng truy cập chéo user ⇒ 404/403.
 
 **T4.4 — Error Pages**
-- [ ] Tạo `templates/error/{403,404,409,422,500}.html` theo layout.
+- [x] Tạo `templates/error/{403,404,409,422,500}.html` theo layout.
 
 **T4.5 — Validation Messages**
-- [ ] Tạo `messages.properties` với thông báo field & business.
+- [x] Tạo `messages.properties` với thông báo field & business.
 - [ ] Chỉnh view form hiển thị `th:errors` đúng chỗ.
 
 **T4.6 — Logging & Headers**
@@ -144,10 +144,10 @@ Mục tiêu P4: Làm **cứng** hệ thống trước khi viết test tổng (P5
 ---
 
 ## 9) Acceptance Criteria chi tiết (Checklist)
-- [ ] Truy cập task/subtask của user khác bằng URL tay ⇒ nhận **404** (hoặc 403 theo chính sách) với trang lỗi chuẩn.
+- [x] Truy cập task/subtask của user khác bằng URL tay ⇒ nhận **404** (hoặc 403 theo chính sách) với trang lỗi chuẩn.
 - [ ] Update Task với `version` cũ ⇒ **409** + thông điệp rõ ràng; reload form sửa được.
 - [ ] Lỗi nghiệp vụ (policy Guard) ⇒ **422** với thông điệp dễ hiểu, giữ giá trị form.
-- [ ] Trang 403/404/409/422/500 có layout thống nhất, có nút quay lại/đi tới `/tasks`.
+- [x] Trang 403/404/409/422/500 có layout thống nhất, có nút quay lại/đi tới `/tasks`.
 - [ ] Log lỗi đúng mức, không rò rỉ dữ liệu nhạy cảm.
 
 ---

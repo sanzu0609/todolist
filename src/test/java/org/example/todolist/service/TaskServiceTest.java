@@ -9,7 +9,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import jakarta.persistence.EntityNotFoundException;
+import org.example.todolist.exception.EntityNotFoundException;
+import org.example.todolist.exception.BusinessException;
+import org.example.todolist.exception.OptimisticLockingAppException;
 import java.time.LocalDate;
 import java.util.Optional;
 import org.example.todolist.domain.dto.TaskCreateDto;
@@ -28,7 +30,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -138,12 +139,12 @@ class TaskServiceTest {
             2L
         );
 
-        assertThrows(OptimisticLockingFailureException.class, () -> taskService.updateTask(42L, 5L, dto));
+        assertThrows(OptimisticLockingAppException.class, () -> taskService.updateTask(42L, 5L, dto));
     }
 
     @Test
     void changeStatusRejectsNull() {
-        assertThrows(IllegalArgumentException.class, () -> taskService.changeStatus(42L, 9L, null, 1L));
+        assertThrows(BusinessException.class, () -> taskService.changeStatus(42L, 9L, null, 1L));
     }
 
     @Test

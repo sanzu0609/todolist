@@ -1,8 +1,14 @@
 ﻿<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="form(taskId, newSubtask)">
-    <form th:action="@{|/tasks/${taskId}/subtasks|}" th:object="${newSubtask}" method="post" class="inline-form" sec:authorize="isAuthenticated()">
-        <label class="sr-only" for="subtaskTitle">Subtask title</label>
-        <input id="subtaskTitle" type="text" th:field="*{title}" placeholder="New subtask title">
-        <button type="submit" class="btn btn-primary">Add</button>
-        <p class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+    <form th:action="@{|/tasks/${taskId}/subtasks|}" th:object="${newSubtask}" method="post"
+          class="row gy-2 gx-3 align-items-center" sec:authorize="isAuthenticated()">
+        <div class="col-lg-8">
+            <label class="form-label visually-hidden" for="subtaskTitle">Subtask title</label>
+            <input id="subtaskTitle" type="text" th:field="*{title}" placeholder="New subtask title"
+                   class="form-control" th:classappend="${#fields.hasErrors('title')} ? ' is-invalid'">
+            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        </div>
+        <div class="col-lg-auto">
+            <button type="submit" class="btn btn-primary px-4">Add</button>
+        </div>
     </form>
 </th:block>

@@ -1,30 +1,46 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="_layout :: layout(~{::section}, 'Register')">
-<section class="form-card" th:fragment="section">
-    <h1>Create account</h1>
-    <form th:action="@{/register}" th:object="${registerForm}" method="post">
-        <div class="form-field" th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
-            <label for="username">Username</label>
-            <input id="username" type="text" th:field="*{username}" autocomplete="username" required>
-            <p class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+<section class="py-2" th:fragment="section">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-xl-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-lg-5">
+                    <h1 class="h2 mb-4 text-center">Create account</h1>
+                    <form th:action="@{/register}" th:object="${registerForm}" method="post" class="vstack gap-3">
+                        <div>
+                            <label for="username" class="form-label">Username</label>
+                            <input id="username" type="text" th:field="*{username}" autocomplete="username" required
+                                   class="form-control" th:classappend="${#fields.hasErrors('username')} ? ' is-invalid'">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                        </div>
+                        <div>
+                            <label for="displayName" class="form-label">Display name (optional)</label>
+                            <input id="displayName" type="text" th:field="*{displayName}" autocomplete="name"
+                                   class="form-control">
+                            <div class="form-text">Shown on profile and task views.</div>
+                        </div>
+                        <div>
+                            <label for="password" class="form-label">Password</label>
+                            <input id="password" type="password" th:field="*{password}" autocomplete="new-password" required
+                                   class="form-control" th:classappend="${#fields.hasErrors('password')} ? ' is-invalid'">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        </div>
+                        <div>
+                            <label for="confirmPassword" class="form-label">Confirm password</label>
+                            <input id="confirmPassword" type="password" th:field="*{confirmPassword}" autocomplete="new-password" required
+                                   class="form-control" th:classappend="${#fields.hasErrors('confirmPassword')} ? ' is-invalid'">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary px-4">Register</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center bg-white border-top-0 py-3">
+                    <p class="mb-0">Already have an account?
+                        <a th:href="@{/login}">Login here</a>.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="form-field">
-            <label for="displayName">Display name (optional)</label>
-            <input id="displayName" type="text" th:field="*{displayName}" autocomplete="name">
-            <p class="hint">Shown on profile and task views.</p>
-        </div>
-        <div class="form-field" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
-            <label for="password">Password</label>
-            <input id="password" type="password" th:field="*{password}" autocomplete="new-password" required>
-            <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-        </div>
-        <div class="form-field" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'has-error'">
-            <label for="confirmPassword">Confirm password</label>
-            <input id="confirmPassword" type="password" th:field="*{confirmPassword}" autocomplete="new-password" required>
-            <p class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
-        </div>
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
-    <p class="form-note">Already have an account? <a th:href="@{/login}">Login here</a>.</p>
+    </div>
 </section>
 </html>

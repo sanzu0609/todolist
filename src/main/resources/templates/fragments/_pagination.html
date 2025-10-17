@@ -1,13 +1,15 @@
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="pagination(page, filter, pageable, currentSort)">
-    <nav class="pagination" th:if="${page.totalPages > 1}">
-        <span class="page-info">Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span></span>
-        <ul class="page-links">
-            <li th:classappend="${page.first} ? 'disabled'">
-                <a th:href="@{/tasks(page=${page.number - 1}, size=${page.size}, status=${filter.status()}, priority=${filter.priority()}, dueOnOrBefore=${filter.dueOnOrBefore()}, q=${filter.q()}, sort=${currentSort})}" aria-label="Previous">Prev</a>
-            </li>
-            <li th:classappend="${page.last} ? 'disabled'">
-                <a th:href="@{/tasks(page=${page.number + 1}, size=${page.size}, status=${filter.status()}, priority=${filter.priority()}, dueOnOrBefore=${filter.dueOnOrBefore()}, q=${filter.q()}, sort=${currentSort})}" aria-label="Next">Next</a>
-            </li>
-        </ul>
+    <nav th:if="${page.totalPages > 1}" aria-label="Task pagination">
+        <div class="d-flex flex-wrap align-items-center gap-3">
+            <span class="text-secondary small">Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span></span>
+            <ul class="pagination mb-0">
+                <li class="page-item" th:classappend="${page.first} ? ' disabled'">
+                    <a class="page-link" th:href="@{/tasks(page=${page.number - 1}, size=${page.size}, status=${filter.status()}, priority=${filter.priority()}, dueOnOrBefore=${filter.dueOnOrBefore()}, q=${filter.q()}, sort=${currentSort})}" aria-label="Previous">Prev</a>
+                </li>
+                <li class="page-item" th:classappend="${page.last} ? ' disabled'">
+                    <a class="page-link" th:href="@{/tasks(page=${page.number + 1}, size=${page.size}, status=${filter.status()}, priority=${filter.priority()}, dueOnOrBefore=${filter.dueOnOrBefore()}, q=${filter.q()}, sort=${currentSort})}" aria-label="Next">Next</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 </th:block>

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="_layout :: layout(~{::section}, 'Server Error')">
-<section th:fragment="section" class="page-container">
-    <h1>Something went wrong</h1>
-    <p th:text="${message} ?: 'An unexpected error occurred. Please try again later.'"></p>
-    <a class="btn" th:href="@{/tasks}">Back to tasks</a>
+<section th:fragment="section" class="py-5">
+    <div class="text-center py-5">
+        <h1 class="display-6 mb-3">Something went wrong</h1>
+        <p class="lead text-secondary mb-4" th:text="${message} ?: 'An unexpected error occurred. Please try again later.'"></p>
+        <a class="btn btn-primary px-4" th:href="@{/tasks}">Back to tasks</a>
+    </div>
 </section>
 </html>

@@ -1,47 +1,55 @@
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="list(taskId, subtasks, taskStatuses, subtaskStatuses)">
-    <div th:if="${#lists.isEmpty(subtasks)}" class="empty-state">
-        <p>No subtasks yet.</p>
+    <div th:if="${#lists.isEmpty(subtasks)}" class="alert alert-secondary border-0 mb-0">
+        No subtasks yet.
     </div>
-    <table class="table" th:if="${!#lists.isEmpty(subtasks)}">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="subtask : ${subtasks}">
-            <td>
-                <form class="inline-form" th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}|}" method="post" sec:authorize="isAuthenticated()">
-                    <input type="text" name="title" th:value="${subtask.title}" required>
-                    <select name="status">
-                        <option th:each="statusOpt : ${subtaskStatuses}"
-                                th:value="${statusOpt}"
-                                th:selected="${subtask.status} == ${statusOpt}"
-                                th:text="${statusOpt}"></option>
-                    </select>
-                    <button type="submit" class="btn btn-link">Save</button>
-                </form>
-            </td>
-            <td><span class="badge" th:text="${subtask.status}"></span></td>
-            <td class="actions">
-                <form th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}/status|}" method="post" class="inline-form" sec:authorize="isAuthenticated()">
-                    <select name="status">
-                        <option th:each="statusOpt : ${subtaskStatuses}"
-                                th:value="${statusOpt}"
-                                th:selected="${subtask.status} == ${statusOpt}"
-                                th:text="${statusOpt}"></option>
-                    </select>
-                    <button type="submit" class="btn btn-link">Update</button>
-                </form>
-                <form th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}/delete|}" method="post" class="inline-form"
-                      sec:authorize="isAuthenticated()"
-                      onsubmit="return confirm('Delete this subtask?');">
-                    <button type="submit" class="btn btn-link destructive">Delete</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive" th:if="${!#lists.isEmpty(subtasks)}">
+        <table class="table align-middle table-striped mb-0">
+            <thead class="table-light">
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="subtask : ${subtasks}">
+                <td class="w-50">
+                    <form class="d-flex flex-column flex-lg-row align-items-lg-center gap-2"
+                          th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}|}" method="post"
+                          sec:authorize="isAuthenticated()">
+                        <input type="text" name="title" th:value="${subtask.title}" required
+                               class="form-control form-control-sm" placeholder="Subtask title">
+                        <select name="status" class="form-select form-select-sm">
+                            <option th:each="statusOpt : ${subtaskStatuses}"
+                                    th:value="${statusOpt}"
+                                    th:selected="${subtask.status} == ${statusOpt}"
+                                    th:text="${statusOpt}"></option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+                    </form>
+                </td>
+                <td>
+                    <span class="badge rounded-pill text-bg-secondary text-uppercase" th:text="${subtask.status}"></span>
+                </td>
+                <td class="d-flex flex-wrap gap-2">
+                    <form th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}/status|}" method="post"
+                          class="d-flex flex-wrap gap-2" sec:authorize="isAuthenticated()">
+                        <select name="status" class="form-select form-select-sm">
+                            <option th:each="statusOpt : ${subtaskStatuses}"
+                                    th:value="${statusOpt}"
+                                    th:selected="${subtask.status} == ${statusOpt}"
+                                    th:text="${statusOpt}"></option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                    </form>
+                    <form th:action="@{|/tasks/${taskId}/subtasks/${subtask.id}/delete|}" method="post"
+                          class="d-inline" sec:authorize="isAuthenticated()"
+                          onsubmit="return confirm('Delete this subtask?');">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </th:block>
